@@ -1,3 +1,3 @@
 # Zeus
 
-Desafio de treinamento BlueLab
+Desafio de treinamento BlueLab.
