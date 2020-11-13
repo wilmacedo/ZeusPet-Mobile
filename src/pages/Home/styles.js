@@ -21,6 +21,7 @@ export const Header = styled.View`
 export const Title = styled.Text`
   font-weight: bold;
   font-size: 40px;
+  color: ${colorScheme.primaryText};
 `;
 
 export const ImageContainer = styled.View`

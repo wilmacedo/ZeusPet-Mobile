@@ -4,8 +4,6 @@ import { StatusBar, Image } from 'react-native';
 
 import { SafeArea, Container, Header, Title, ImageContainer } from './styles';
 
-import { Ionicons } from '@expo/vector-icons';
-
 import { colorScheme } from '../../utils';
 
 const Home = () => {
