@@ -38,7 +38,7 @@ const Button = (props) => {
       onPressOut={changeColor}
     >
       <ButtonContainer
-        style={{ borderColor, backgroundColor }}
+        style={{ borderColor, backgroundColor, marginRight: props.margin }}
       >
         <Icon />
       </ButtonContainer>

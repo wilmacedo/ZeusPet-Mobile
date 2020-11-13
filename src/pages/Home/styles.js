@@ -79,6 +79,8 @@ export const BoxContainer = styled.View`
 export const BoxText = styled.Text`
   margin-left: 10px;
   color: ${colorScheme.black};
+  font-family: 'regular';
+  font-size: 12px;
 `;
 
 export const ActionBtnContainer = styled.View`

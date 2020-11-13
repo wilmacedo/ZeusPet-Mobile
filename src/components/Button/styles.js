@@ -7,5 +7,4 @@ export const ButtonContainer = styled.View`
   border-radius: 25px;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
 `;

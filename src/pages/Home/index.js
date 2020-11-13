@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { StatusBar, Image } from 'react-native';
 
@@ -26,6 +26,7 @@ import Button from '../../components/Button';
 import { colorScheme } from '../../utils';
 
 const Home = () => {
+  const [selectedBox, setSelectedBox] = useState(null);
 
   return <>
     <StatusBar
@@ -44,7 +45,10 @@ const Home = () => {
           />
         </ImageContainer>
         <ButtonsContainer>
-          <Button iconType='store' />
+          <Button
+            iconType='store'
+            margin={10}
+          />
           <Button iconType='stats' />
         </ButtonsContainer>
         {/* <MessageContainer>
@@ -62,8 +66,10 @@ const Home = () => {
               size={24}
               color={colorScheme.black}
             />
-            <BoxText>
-              Teste de texto
+            <BoxText
+              style={{ fontSize: selectedBox == null ? 12 : 14 }}
+            >
+              Escolha uma opção!
             </BoxText>
           </BoxContainer>
           <ActionBtnContainer>
