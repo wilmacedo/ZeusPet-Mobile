@@ -27,7 +27,7 @@ const Home = () => {
         <ImageContainer>
           <Image
             source={require('../../../assets/dog.png')}
-            style={{ height: 234, width: 336 }}
+            style={{ height: 240, width: 328 }}
           />
         </ImageContainer>
         <ButtonContainer>
