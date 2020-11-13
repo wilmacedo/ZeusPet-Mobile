@@ -2,13 +2,13 @@ import React from 'react';
 
 import { StatusBar, Image } from 'react-native';
 
-import { 
-  SafeArea, 
-  Container, 
-  Header, 
-  Title, 
-  ImageContainer, 
-  ButtonContainer 
+import {
+  SafeArea,
+  Container,
+  Header,
+  Title,
+  ImageContainer,
+  ButtonContainer
 } from './styles';
 
 import Button from '../../components/Button';
@@ -31,8 +31,8 @@ const Home = () => {
           />
         </ImageContainer>
         <ButtonContainer>
-          <Button />
-          <Button />
+          <Button iconType='store' />
+          <Button iconType='stats' />
         </ButtonContainer>
       </Container>
     </SafeArea>

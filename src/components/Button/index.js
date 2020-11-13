@@ -1,13 +1,13 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 
 import { TouchableWithoutFeedback } from 'react-native';
 import { ButtonContainer } from './styles';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { colorScheme } from '../../utils';
 
-const Button = () => {
+const Button = (props) => {
   const [borderColor, setBorderColor] = useState(colorScheme.unselected);
   const [backgroundColor, setBackgroundColor] = useState(colorScheme.background);
   const [iconColor, setIconColor] = useState(colorScheme.black);
@@ -24,6 +24,14 @@ const Button = () => {
     }
   }
 
+  const Icon = () => {
+    if (props.iconType == 'stats') {
+      return <Ionicons name='md-stats' size={28} color={iconColor} />;
+    } else {
+      return <MaterialCommunityIcons name="shopping" size={28} color={iconColor} />;
+    }
+  }
+
   return (
     <TouchableWithoutFeedback
       onPressIn={changeColor}
@@ -32,7 +40,7 @@ const Button = () => {
       <ButtonContainer
         style={{ borderColor, backgroundColor }}
       >
-        <Ionicons name="md-stats" size={28} color={iconColor} />
+        <Icon />
       </ButtonContainer>
     </TouchableWithoutFeedback>
   );
