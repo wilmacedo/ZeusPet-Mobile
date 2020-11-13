@@ -8,8 +8,18 @@ import {
   Header,
   Title,
   ImageContainer,
-  ButtonContainer
+  ButtonsContainer,
+  MessageContainer,
+  LogoImage,
+  Message,
+  ActionContainer,
+  BoxContainer,
+  BoxText,
+  ActionBtnContainer,
+  ActionBtnText,
 } from './styles';
+
+import { Feather } from '@expo/vector-icons';
 
 import Button from '../../components/Button';
 
@@ -18,11 +28,14 @@ import { colorScheme } from '../../utils';
 const Home = () => {
 
   return <>
-    <StatusBar barStyle='dark-content' backgroundColor={colorScheme.background} />
+    <StatusBar
+      barStyle='dark-content'
+      backgroundColor={colorScheme.background}
+    />
     <SafeArea>
       <Container>
         <Header>
-          <Title>Zeus</Title>
+          <Title>ZEUS</Title>
         </Header>
         <ImageContainer>
           <Image
@@ -30,10 +43,35 @@ const Home = () => {
             style={{ height: 240, width: 328 }}
           />
         </ImageContainer>
-        <ButtonContainer>
+        <ButtonsContainer>
           <Button iconType='store' />
           <Button iconType='stats' />
-        </ButtonContainer>
+        </ButtonsContainer>
+        {/* <MessageContainer>
+          <LogoImage
+            source={require('../../../assets/cropped_dog.png')}
+          />
+          <Message>
+            Escolha uma opção!
+          </Message>
+        </MessageContainer> */}
+        <ActionContainer>
+          <BoxContainer>
+            <Feather
+              name="calendar"
+              size={24}
+              color={colorScheme.black}
+            />
+            <BoxText>
+              Teste de texto
+            </BoxText>
+          </BoxContainer>
+          <ActionBtnContainer>
+            <ActionBtnText>
+              Comprar
+            </ActionBtnText>
+          </ActionBtnContainer>
+        </ActionContainer>
       </Container>
     </SafeArea>
   </>
