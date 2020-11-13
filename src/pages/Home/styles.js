@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { Platform } from 'react-native';
+
 import { colorScheme } from '../../utils';
 
 export const SafeArea = styled.SafeAreaView`
@@ -22,6 +24,8 @@ export const Title = styled.Text`
   font-weight: bold;
   font-size: 40px;
   color: ${colorScheme.black};
+  font-family: 'light';
+  letter-spacing: 3px;
 `;
 
 export const ImageContainer = styled.View`
