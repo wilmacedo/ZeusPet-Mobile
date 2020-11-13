@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { StatusBar, Image } from 'react-native';
 
@@ -9,25 +9,14 @@ import {
   Title,
   ImageContainer,
   ButtonsContainer,
-  MessageContainer,
-  LogoImage,
-  Message,
-  ActionContainer,
-  BoxContainer,
-  BoxText,
-  ActionBtnContainer,
-  ActionBtnText,
 } from './styles';
 
-import { Feather } from '@expo/vector-icons';
-
 import Button from '../../components/Button';
+import BottomInfo from '../../components/BottomInfo';
 
 import { colorScheme } from '../../utils';
 
 const Home = () => {
-  const [selectedBox, setSelectedBox] = useState(null);
-
   return <>
     <StatusBar
       barStyle='dark-content'
@@ -51,33 +40,7 @@ const Home = () => {
           />
           <Button iconType='stats' />
         </ButtonsContainer>
-        {/* <MessageContainer>
-          <LogoImage
-            source={require('../../../assets/cropped_dog.png')}
-          />
-          <Message>
-            Escolha uma opção!
-          </Message>
-        </MessageContainer> */}
-        <ActionContainer>
-          <BoxContainer>
-            <Feather
-              name="calendar"
-              size={24}
-              color={colorScheme.black}
-            />
-            <BoxText
-              style={{ fontSize: selectedBox == null ? 12 : 14 }}
-            >
-              Escolha uma opção!
-            </BoxText>
-          </BoxContainer>
-          <ActionBtnContainer>
-            <ActionBtnText>
-              Comprar
-            </ActionBtnText>
-          </ActionBtnContainer>
-        </ActionContainer>
+        <BottomInfo />
       </Container>
     </SafeArea>
   </>

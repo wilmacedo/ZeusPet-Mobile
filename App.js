@@ -5,11 +5,11 @@ import { AppLoading } from 'expo';
 
 import Navigation from './src/routes';
 
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'light': require('./assets/fonts/light.otf'),
-    'regular': require('./assets/fonts/regular.otf'),
-    'bold': require('./assets/fonts/bold.otf')
+const fetchFonts = async () => {
+  return await Font.loadAsync({
+    light: require('./assets/fonts/light.ttf'),
+    regular: require('./assets/fonts/regular.ttf'),
+    bold: require('./assets/fonts/bold.ttf')
   });
 };
 
