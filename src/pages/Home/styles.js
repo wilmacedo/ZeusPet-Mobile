@@ -21,10 +21,17 @@ export const Header = styled.View`
 export const Title = styled.Text`
   font-weight: bold;
   font-size: 40px;
-  color: ${colorScheme.primaryText};
+  color: ${colorScheme.black};
 `;
 
 export const ImageContainer = styled.View`
   margin: 40px 0 0 5px;
   align-items: center;
 `;
+
+export const ButtonContainer = styled.View`
+  margin-top: 40px;
+  flex-direction: row;
+  justify-content: center;
+`;
+
