@@ -9,3 +9,9 @@ Desafio proposto por BlueLab para ser utilizado como treinamento de diversas fer
 ## Ideias
 - [ ] Registro de gastos
 - [ ] Histórico de gastos
+
+## Tecnologias Utilizadas
+
+- React Native
+- MongoDB
+- ReactJS
