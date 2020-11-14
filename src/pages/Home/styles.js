@@ -23,7 +23,7 @@ export const Title = styled.Text`
   font-size: 40px;
   color: ${colorScheme.black};
   font-family: 'light';
-  letter-spacing: 5px;
+  letter-spacing: 6px;
 `;
 
 export const ImageContainer = styled.View`
