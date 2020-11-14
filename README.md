@@ -9,7 +9,7 @@ Desafio proposto por BlueLab para ser utilizado como treinamento de diversas fer
 ## Ideias
 - [ ] Registro de gastos
 - [ ] Histórico de gastos
-- [ ] Múltipls pets
+- [ ] Múltiplos pets
 
 ## Tecnologias Utilizadas
 
