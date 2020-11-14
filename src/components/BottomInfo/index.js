@@ -39,7 +39,7 @@ const BottomInfo = (props) => {
           style={[ActionButtonStyle, { width: props.width }]}
         >
           <ActionButtonText>
-            Atualizar
+            Escolha uma opção!
         </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
