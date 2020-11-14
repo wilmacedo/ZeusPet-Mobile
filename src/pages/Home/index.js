@@ -18,6 +18,7 @@ import { colorScheme } from '../../utils';
 
 const Home = () => {
   const [selectedCard, setSelectedCard] = useState('none');
+  const [delaySelectedCard, setDelaySelectedCard] = useState('none');
   let standardWidth = Platform.OS === 'ios' ? 292 : 301;
   const [width, setWidth] = useState(new Animated.Value(standardWidth));
 
@@ -40,6 +41,7 @@ const Home = () => {
       closeAnimation.start();
     } else if (selectedCard == 'none') {
       setSelectedCard(name);
+      setDelaySelectedCard(name);
       openAnimation.start();
     }
   }
@@ -79,7 +81,7 @@ const Home = () => {
             }}
           />
         </CardContainer>
-        <BottomInfo selectedCard={selectedCard} width={width} />
+        <BottomInfo selectedCard={selectedCard} delaySelectedCard={delaySelectedCard} width={width} />
       </Container>
     </SafeArea>
   </>

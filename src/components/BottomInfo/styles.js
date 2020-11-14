@@ -19,7 +19,8 @@ export const BoxContainer = styled.View`
 `;
 
 export const BoxText = styled.Text`
-  margin-left: 10px;
+  margin: 3px 0 0 10px;
+  max-width: 130px;
   color: ${colorScheme.black};
   font-family: 'regular';
   font-size: 14px;
@@ -37,7 +38,7 @@ export const ActionButtonStyle = {
 };
 
 export const ActionButtonText = styled.Text`
-  font-family: 'regular';
+  font-family: 'light';
   font-size: 18px;
   color: ${colorScheme.background};
 `;

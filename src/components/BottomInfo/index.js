@@ -14,24 +14,39 @@ import {
 
 import { colorScheme } from '../../utils';
 
-import { Feather } from '@expo/vector-icons';
-import { } from 'react-native-gesture-handler';
+import { MaterialIcons, Feather } from '@expo/vector-icons';
 
 const BottomInfo = (props) => {
+  const Icon = () => {
+    let card = props.delaySelectedCard;
+
+    if (card == 'store') {
+      return <MaterialIcons
+        name='pets'
+        size={24}
+        color={colorScheme.black}
+      />
+    } else if (card == 'stats') {
+      return <Feather
+        name='calendar'
+        size={24}
+        color={colorScheme.black}
+      />
+    }
+
+    return <></>;
+  }
+
   return (
     <Container>
       <BoxContainer>
-        <Feather
-          name="calendar"
-          size={24}
-          color={colorScheme.black}
-        />
-        <BoxText>15 de Maio, 13:03</BoxText>
+        <Icon />
+        <BoxText>Nada aqui ainda :|</BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {
           if (props.selectedCard != 'none') {
-            
+
           }
         }}
       >
@@ -39,8 +54,8 @@ const BottomInfo = (props) => {
           style={[ActionButtonStyle, { width: props.width }]}
         >
           <ActionButtonText>
-            Escolha uma opção!
-        </ActionButtonText>
+            {props.selectedCard == 'none' ? 'Escolha uma opção!' : 'Adicionar'}
+          </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
     </Container>
