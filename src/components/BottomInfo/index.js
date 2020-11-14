@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { Animated } from 'react-native';
 
 import {
   Container,
   BoxContainer,
   BoxText,
-  ActionButtonContainer,
-  ActionButtonText
+  ActionButtonText,
+  ActionButtonStyle
 } from './styles';
 
 import { colorScheme } from '../../utils';
 
 import { Feather } from '@expo/vector-icons';
 
-const BottomInfo = () => {
-  const [selectedBox, setSelectedBox] = useState(null);
-
+const BottomInfo = (props) => {
   return (
     <Container>
       <BoxContainer>
@@ -23,17 +23,15 @@ const BottomInfo = () => {
           size={24}
           color={colorScheme.black}
         />
-        <BoxText
-          style={{ fontSize: selectedBox == null ? 12 : 14 }}
-        >
-          Escolha uma opção!
-            </BoxText>
+        <BoxText>15 de Maio, 13:03</BoxText>
       </BoxContainer>
-      <ActionButtonContainer>
+      <Animated.View
+        style={[ActionButtonStyle, { width: props.width}]}
+      >
         <ActionButtonText>
-          Comprar
-            </ActionButtonText>
-      </ActionButtonContainer>
+          Atualizar
+        </ActionButtonText>
+      </Animated.View>
     </Container>
   );
 }

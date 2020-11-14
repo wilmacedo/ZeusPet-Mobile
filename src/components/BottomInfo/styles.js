@@ -22,19 +22,19 @@ export const BoxText = styled.Text`
   margin-left: 10px;
   color: ${colorScheme.black};
   font-family: 'regular';
-  font-size: 12px;
+  font-size: 14px;
 `;
 
-export const ActionButtonContainer = styled.View`
-  height: 60px;
-  width: 120px;
-  border-radius: 25px;
-  background-color: ${colorScheme.black};
-  position: absolute;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-`;
+export const ActionButtonStyle = {
+  height: 60,
+  width: 292,
+  borderRadius: 25,
+  backgroundColor: colorScheme.black,
+  position: 'absolute',
+  right: 0,
+  justifyContent: 'center',
+  alignItems: 'center'
+};
 
 export const ActionButtonText = styled.Text`
   font-family: 'regular';

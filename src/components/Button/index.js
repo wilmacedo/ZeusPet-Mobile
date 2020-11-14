@@ -36,6 +36,7 @@ const Button = (props) => {
     <TouchableWithoutFeedback
       onPressIn={changeColor}
       onPressOut={changeColor}
+      onPress={props.onPress}
     >
       <ButtonContainer
         style={{

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { StatusBar, Image } from 'react-native';
+import { StatusBar, Image, Animated } from 'react-native';
 
 import {
   SafeArea,
@@ -17,6 +17,29 @@ import BottomInfo from '../../components/BottomInfo';
 import { colorScheme } from '../../utils';
 
 const Home = () => {
+  const [selectedBox, setSelectedBox] = useState(0);
+  const [width, setWidth] = useState(new Animated.Value(292));
+
+  const openAnimation = Animated.spring(width, {
+    toValue: 120,
+    useNativeDriver: false,
+  });
+
+  const closeAnimation = Animated.spring(width, {
+    toValue: 292,
+    useNativeDriver: false,
+  });
+
+  const animateInfo = (index) => {
+    if (selectedBox == index) {
+      closeAnimation.start();
+      setSelectedBox(0);
+    } else {
+      openAnimation.start();
+      setSelectedBox(index);
+    }
+  }
+  
   return <>
     <StatusBar
       barStyle='dark-content'
@@ -37,10 +60,18 @@ const Home = () => {
           <Button
             iconType='store'
             margin={10}
+            onPress={() => {
+              animateInfo(1);
+            }}
           />
-          <Button iconType='stats' />
+          <Button
+            iconType='stats'
+            onPress={() => {
+              animateInfo(2);
+            }}
+          />
         </ButtonsContainer>
-        <BottomInfo />
+        <BottomInfo selectedBox={selectedBox} width={width} />
       </Container>
     </SafeArea>
   </>
