@@ -31,7 +31,7 @@ export const ImageContainer = styled.View`
   align-items: center;
 `;
 
-export const ButtonsContainer = styled.View`
+export const CardContainer = styled.View`
   margin-top: 40px;
   flex-direction: row;
   justify-content: center;

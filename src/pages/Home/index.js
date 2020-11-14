@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { StatusBar, Image, Animated } from 'react-native';
+import { StatusBar, Image, Animated, Platform } from 'react-native';
 
 import {
   SafeArea,
@@ -8,17 +8,18 @@ import {
   Header,
   Title,
   ImageContainer,
-  ButtonsContainer,
+  CardContainer,
 } from './styles';
 
-import Button from '../../components/Button';
+import Card from '../../components/Card';
 import BottomInfo from '../../components/BottomInfo';
 
 import { colorScheme } from '../../utils';
 
 const Home = () => {
-  const [selectedBox, setSelectedBox] = useState(0);
-  const [width, setWidth] = useState(new Animated.Value(292));
+  const [selectedCard, setSelectedCard] = useState('none');
+  let standardWidth = Platform.OS === 'ios' ? 292 : 301;
+  const [width, setWidth] = useState(new Animated.Value(standardWidth));
 
   const openAnimation = Animated.spring(width, {
     toValue: 120,
@@ -26,20 +27,23 @@ const Home = () => {
   });
 
   const closeAnimation = Animated.spring(width, {
-    toValue: 292,
+    toValue: standardWidth,
     useNativeDriver: false,
   });
 
-  const animateInfo = (index) => {
-    if (selectedBox == index) {
+  const pressCard = (name) => {
+    if (selectedCard == name) {
+      setSelectedCard('none');
       closeAnimation.start();
-      setSelectedBox(0);
-    } else {
+    } else if (selectedCard != name && selectedCard != 'none') {
+      setSelectedCard('none');
+      closeAnimation.start();
+    } else if (selectedCard == 'none') {
+      setSelectedCard(name);
       openAnimation.start();
-      setSelectedBox(index);
     }
   }
-  
+
   return <>
     <StatusBar
       barStyle='dark-content'
@@ -56,22 +60,26 @@ const Home = () => {
             style={{ height: 240, width: 328 }}
           />
         </ImageContainer>
-        <ButtonsContainer>
-          <Button
+        <CardContainer>
+          <Card
+            selectedCard={selectedCard}
+            name='store'
             iconType='store'
             margin={10}
             onPress={() => {
-              animateInfo(1);
+              pressCard('store');
             }}
           />
-          <Button
+          <Card
+            selectedCard={selectedCard}
+            name='stats'
             iconType='stats'
             onPress={() => {
-              animateInfo(2);
+              pressCard('stats');
             }}
           />
-        </ButtonsContainer>
-        <BottomInfo selectedBox={selectedBox} width={width} />
+        </CardContainer>
+        <BottomInfo selectedCard={selectedCard} width={width} />
       </Container>
     </SafeArea>
   </>

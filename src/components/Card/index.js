@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { TouchableWithoutFeedback } from 'react-native';
-import { ButtonContainer } from './styles';
+import { CardContainer } from './styles';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { colorScheme } from '../../utils';
 
-const Button = (props) => {
+const Card = (props) => {
   const [borderColor, setBorderColor] = useState(colorScheme.unselected);
   const [backgroundColor, setBackgroundColor] = useState(colorScheme.background);
   const [iconColor, setIconColor] = useState(colorScheme.black);
 
-  const changeColor = () => {
-    if (borderColor === colorScheme.unselected) {
+  useEffect(() => {
+    if (props.selectedCard == props.name) {
       setBorderColor(colorScheme.black);
       setBackgroundColor(colorScheme.black);
       setIconColor(colorScheme.background);
@@ -22,7 +22,7 @@ const Button = (props) => {
       setBackgroundColor(colorScheme.background);
       setIconColor(colorScheme.black);
     }
-  }
+  });
 
   const Icon = () => {
     if (props.iconType == 'stats') {
@@ -34,11 +34,11 @@ const Button = (props) => {
 
   return (
     <TouchableWithoutFeedback
-      onPressIn={changeColor}
-      onPressOut={changeColor}
-      onPress={props.onPress}
+      onPress={() => {
+        props.onPress();
+      }}
     >
-      <ButtonContainer
+      <CardContainer
         style={{
           borderColor,
           backgroundColor,
@@ -46,9 +46,9 @@ const Button = (props) => {
         }}
       >
         <Icon />
-      </ButtonContainer>
+      </CardContainer>
     </TouchableWithoutFeedback>
   );
 }
 
-export default Button;
+export default Card;

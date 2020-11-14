@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ButtonContainer = styled.View`
+export const CardContainer = styled.View`
   border-width: 1px;
   height: 85px;
   width: 85px;
