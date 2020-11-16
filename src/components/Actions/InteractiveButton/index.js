@@ -12,21 +12,27 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { colorScheme } from '../../utils';
+import { colorScheme } from '../../../utils';
 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 
-const BottomInfo = (props) => {
-  const Icon = () => {
-    let card = props.delaySelectedCard;
+const InteractiveButton = (props) => {
+  const { 
+    delaySelectedCard, 
+    selectedCard,
+    width,
+    bottomSheet,
+    snapPosition,
+  } = props;
 
-    if (card == 'store') {
+  const Icon = () => {
+    if (delaySelectedCard == 'store') {
       return <MaterialIcons
         name='pets'
         size={24}
         color={colorScheme.black}
       />
-    } else if (card == 'stats') {
+    } else if (delaySelectedCard == 'stats') {
       return <Feather
         name='calendar'
         size={24}
@@ -45,16 +51,16 @@ const BottomInfo = (props) => {
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {
-          if (props.selectedCard != 'none') {
-
+          if (selectedCard != 'none') {
+            bottomSheet.current.snapTo(0);
           }
         }}
       >
         <Animated.View
-          style={[ActionButtonStyle, { width: props.width }]}
+          style={[ActionButtonStyle, { width }]}
         >
           <ActionButtonText>
-            {props.selectedCard == 'none' ? 'Escolha uma opção!' : 'Adicionar'}
+            {selectedCard == 'none' ? 'Escolha uma opção!' : 'Adicionar'}
           </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
@@ -62,4 +68,4 @@ const BottomInfo = (props) => {
   );
 }
 
-export default BottomInfo;
+export default InteractiveButton;

@@ -1,89 +1,77 @@
-import React, { useState } from 'react';
-
-import { StatusBar, Image, Animated, Platform } from 'react-native';
+import React, { useState, useRef } from 'react';
 
 import {
+  StatusBar,
+  Image,
+} from 'react-native';
+
+import {
+  Blackout,
   SafeArea,
   Container,
   Header,
   Title,
   ImageContainer,
-  CardContainer,
 } from './styles';
 
-import Card from '../../components/Card';
-import BottomInfo from '../../components/BottomInfo';
+import Actions from '../../components/Actions';
+import BottomOptions from '../../components/BottomOptions';
 
 import { colorScheme } from '../../utils';
+
+import Animated from 'react-native-reanimated';
 
 const Home = () => {
   const [selectedCard, setSelectedCard] = useState('none');
   const [delaySelectedCard, setDelaySelectedCard] = useState('none');
-  let standardWidth = Platform.OS === 'ios' ? 292 : 301;
-  const [width, setWidth] = useState(new Animated.Value(standardWidth));
 
-  const openAnimation = Animated.spring(width, {
-    toValue: 120,
-    useNativeDriver: false,
-  });
-
-  const closeAnimation = Animated.spring(width, {
-    toValue: standardWidth,
-    useNativeDriver: false,
-  });
-
-  const pressCard = (name) => {
-    if (selectedCard == name) {
-      setSelectedCard('none');
-      closeAnimation.start();
-    } else if (selectedCard != name && selectedCard != 'none') {
-      setSelectedCard('none');
-      closeAnimation.start();
-    } else if (selectedCard == 'none') {
-      setSelectedCard(name);
-      setDelaySelectedCard(name);
-      openAnimation.start();
-    }
-  }
+  const [snapPosition, setSnapPosition] = useState(1);
+  const bottomSheet = useRef();
+  const backgroundOpacity = new Animated.Value(1);
 
   return <>
     <StatusBar
       barStyle='dark-content'
       backgroundColor={colorScheme.background}
     />
-    <SafeArea>
-      <Container>
-        <Header>
-          <Title>ZEUS</Title>
-        </Header>
-        <ImageContainer>
-          <Image
-            source={require('../../../assets/dog.png')}
-            style={{ height: 240, width: 328 }}
-          />
-        </ImageContainer>
-        <CardContainer>
-          <Card
-            selectedCard={selectedCard}
-            name='store'
-            iconType='store'
-            margin={10}
-            onPress={() => {
-              pressCard('store');
-            }}
-          />
-          <Card
-            selectedCard={selectedCard}
-            name='stats'
-            iconType='stats'
-            onPress={() => {
-              pressCard('stats');
-            }}
-          />
-        </CardContainer>
-        <BottomInfo selectedCard={selectedCard} delaySelectedCard={delaySelectedCard} width={width} />
-      </Container>
-    </SafeArea>
+    <BottomOptions
+      reference={bottomSheet}
+      callback={backgroundOpacity}
+    />
+    <Blackout
+      onPress={() => {
+        bottomSheet.current.snapTo(1);
+      }}
+    >
+      <Animated.View
+        style={{
+          flex: 1,
+          opacity: Animated.add(0.35, Animated.multiply(backgroundOpacity, 1)),
+        }}
+      >
+        <SafeArea>
+          <Container>
+            <Header>
+              <Title>ZEUS</Title>
+            </Header>
+            <ImageContainer>
+              <Image
+                source={require('../../../assets/dog.png')}
+                style={{ height: 240, width: 328 }}
+              />
+            </ImageContainer>
+            <Actions
+              selectedCard={selectedCard}
+              delaySelectedCard={delaySelectedCard}
+              bottomSheet={bottomSheet}
+              snapPosition={snapPosition}
+              setSelectedCard={setSelectedCard}
+              setDelaySelectedCard={setDelaySelectedCard}
+            />
+          </Container>
+        </SafeArea>
+      </Animated.View>
+    </Blackout>
   </>
 }
 

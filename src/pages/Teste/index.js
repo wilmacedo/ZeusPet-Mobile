@@ -42,13 +42,13 @@ export default class Example extends React.Component {
         <Animated.View
           style={{
             alignItems: 'center',
-            opacity: Animated.add(0.85, Animated.multiply(this.fall, 1)),
+            opacity: Animated.add(0.5, Animated.multiply(this.fall, 1)),
           }}
         >
           <Text style={{ position: 'absolute', zIndex: 1 }}>
             Swipe up from very bottom
           </Text>
-          <Image style={styles.map} source={require('../../../assets/map-bg.jpg')} />
+          <Image source={require('../../../assets/dog.png')} />
         </Animated.View>
       </View>
     )
