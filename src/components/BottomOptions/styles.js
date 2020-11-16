@@ -40,12 +40,37 @@ export const FormHourText = styled.TextInput`
 
 export const FormDayContainer = styled.View`
   justify-content: center;
-`; 
+`;
 
 export const FormDayText = styled.TextInput`
   padding-left: 15px;
-  color: ${colorScheme.black};
   font-family: 'regular';
   font-size: 22px;
-  color: ${colorScheme.fontLight}
+  color: ${colorScheme.fontLight};
+`;
+
+export const FormValueContainer = styled.View`
+  margin: 20px 0 0 30px;
+`;
+
+export const FormValueBox = styled.View`
+  height: 70px;
+  width: 320px;
+  border-color: ${colorScheme.unselected};
+  border-width: 1px;
+  border-radius: 25px;
+  padding-left: 10px;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+export const IconContainer = styled.View`
+  margin: 0 10px 0 10px;
+`;
+
+export const FormValueText = styled.TextInput`
+  color: ${colorScheme.black};
+  font-size: 25px;
+  font-family: 'regular';
 `;

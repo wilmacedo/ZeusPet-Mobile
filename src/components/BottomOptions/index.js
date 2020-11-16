@@ -14,10 +14,15 @@ import {
   FormHourText,
   FormDayText,
   FormDayContainer,
+  FormValueContainer,
+  FormValueBox,
+  IconContainer,
+  FormValueText
 } from './styles';
 
+import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+
 import BottomSheet from 'reanimated-bottom-sheet';
-import { colorScheme } from '../../utils';
 
 const BottomOptions = (props) => {
   const [hourValue, setHourValue] = useState('07');
@@ -75,6 +80,32 @@ const BottomOptions = (props) => {
                 />
               </FormDayContainer>
             </FormDateContainer>
+            <FormValueContainer>
+              <FormValueBox>
+                <IconContainer>
+                  <MaterialCommunityIcons
+                    name="subtitles-outline"
+                    size={30}
+                    color="black"
+                  />
+                </IconContainer>
+                <FormValueText
+                  placeholder={'Ração'}
+                />
+              </FormValueBox>
+              <FormValueBox>
+                <IconContainer>
+                  <FontAwesome5
+                    name="money-bill-alt"
+                    size={26}
+                    color="black"
+                  />
+                </IconContainer>
+                <FormValueText
+                  placeholder={'R$30,00'}
+                />
+              </FormValueBox>
+            </FormValueContainer>
           </FormContainer>
         </Container>
       </TouchableWithoutFeedback>
