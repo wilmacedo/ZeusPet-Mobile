@@ -5,29 +5,26 @@ import { AppLoading } from 'expo';
 
 import Navigation from './src/routes';
 
-const fetchFonts = async () => {
-  return await Font.loadAsync({
-    light: require('./assets/fonts/light.ttf'),
-    regular: require('./assets/fonts/regular.ttf'),
-    bold: require('./assets/fonts/bold.ttf')
-  });
-};
+const loadFonts = () => Font.loadAsync({
+  'light': require('./assets/fonts/light.ttf'),
+  'regular': require('./assets/fonts/regular.ttf'),
+  'bold': require('./assets/fonts/bold.ttf'),
+});
 
 export default function App() {
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
 
-  if (!dataLoaded) {
+  if (!fontLoaded) {
     return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setDataLoaded(true)}
+      <AppLoading 
+        startAsync={loadFonts}
+        onFinish={() => setFontLoaded(true)}
       />
+    );
+  } else {
+    return (
+      <Navigation />
     );
   }
 
-  return (
-    <>
-      <Navigation />
-    </>
-  );
 }

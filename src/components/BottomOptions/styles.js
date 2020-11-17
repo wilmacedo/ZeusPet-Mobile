@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import { colorScheme } from '../../utils';
 
 export const HeaderContainer = styled.View`
@@ -26,51 +27,22 @@ export const FormContainer = styled.View`
   padding: 10px;
 `;
 
-export const FormDateContainer = styled.View`
-  flex-direction: row;
+export const AddButtonContainer = styled.View`
+  margin-top: 15px;
   align-items: center;
-  margin-left: 30px;
 `;
 
-export const FormHourText = styled.TextInput`
-  color: ${colorScheme.black};
-  font-family: 'bold';
-  font-size: 60px;
-`;
-
-export const FormDayContainer = styled.View`
-  justify-content: center;
-`;
-
-export const FormDayText = styled.TextInput`
-  padding-left: 15px;
-  font-family: 'regular';
-  font-size: 22px;
-  color: ${colorScheme.fontLight};
-`;
-
-export const FormValueContainer = styled.View`
-  margin: 20px 0 0 30px;
-`;
-
-export const FormValueBox = styled.View`
-  height: 70px;
-  width: 320px;
-  border-color: ${colorScheme.unselected};
-  border-width: 1px;
+export const AddButtonBox = styled.TouchableOpacity`
+  height: 60px;
+  width: 150px;
+  background-color: ${colorScheme.black};
   border-radius: 25px;
-  padding-left: 10px;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
 `;
 
-export const IconContainer = styled.View`
-  margin: 0 10px 0 10px;
-`;
-
-export const FormValueText = styled.TextInput`
-  color: ${colorScheme.black};
-  font-size: 25px;
-  font-family: 'regular';
+export const AddButtonText = styled.Text`
+  font-family: 'light';
+  color: ${colorScheme.background};
+  font-size: 20px;
 `;

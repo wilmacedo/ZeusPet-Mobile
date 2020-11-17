@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import {
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import {
@@ -10,24 +11,17 @@ import {
   HandlerContainer,
   Container,
   FormContainer,
-  FormDateContainer,
-  FormHourText,
-  FormDayText,
-  FormDayContainer,
-  FormValueContainer,
-  FormValueBox,
-  IconContainer,
-  FormValueText
+  AddButtonBox,
+  AddButtonContainer,
+  AddButtonText
 } from './styles';
 
-import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import Shop from './Shop';
+import Stats from './Stats';
 
 import BottomSheet from 'reanimated-bottom-sheet';
 
 const BottomOptions = (props) => {
-  const [hourValue, setHourValue] = useState('07');
-  const [minValue, setMinValue] = useState('30');
-
   const {
     reference,
     callback
@@ -44,71 +38,29 @@ const BottomOptions = (props) => {
       </TouchableWithoutFeedback>
     );
   }
-
+  
   const renderContent = () => {
     return (
-      <TouchableWithoutFeedback
-        onPress={() => Keyboard.dismiss()}
+      <KeyboardAvoidingView
       >
-        <Container>
-          <FormContainer>
-            <FormDateContainer>
-              <FormHourText
-                value={hourValue}
-                keyboardType={'number-pad'}
-                maxLength={2}
-              />
-              <FormHourText
-                value={':'}
-                editable={false}
-              />
-              <FormHourText
-                value={minValue}
-                keyboardType={'number-pad'}
-                maxLength={2}
-              />
-              <FormDayContainer>
-                <FormDayText
-                  style={{
-                    fontSize: 25
-                  }}
-                  value={'30'}
-                  maxLength={2}
-                />
-                <FormDayText
-                  value={'Abril'}
-                />
-              </FormDayContainer>
-            </FormDateContainer>
-            <FormValueContainer>
-              <FormValueBox>
-                <IconContainer>
-                  <MaterialCommunityIcons
-                    name="subtitles-outline"
-                    size={30}
-                    color="black"
-                  />
-                </IconContainer>
-                <FormValueText
-                  placeholder={'Ração'}
-                />
-              </FormValueBox>
-              <FormValueBox>
-                <IconContainer>
-                  <FontAwesome5
-                    name="money-bill-alt"
-                    size={26}
-                    color="black"
-                  />
-                </IconContainer>
-                <FormValueText
-                  placeholder={'R$30,00'}
-                />
-              </FormValueBox>
-            </FormValueContainer>
-          </FormContainer>
-        </Container>
-      </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => Keyboard.dismiss()}
+        >
+          <Container>
+            <FormContainer>
+              <Shop />
+              <Stats />
+              <AddButtonContainer>
+                <AddButtonBox>
+                  <AddButtonText>
+                    Adicionar
+                  </AddButtonText>
+                </AddButtonBox>
+              </AddButtonContainer>
+            </FormContainer>
+          </Container>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 

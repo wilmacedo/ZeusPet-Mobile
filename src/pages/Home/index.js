@@ -18,7 +18,7 @@ import {
 import Actions from '../../components/Actions';
 import BottomOptions from '../../components/BottomOptions';
 
-import { colorScheme } from '../../utils';
+import { colorScheme, KeyboardFix } from '../../utils';
 
 import Animated from 'react-native-reanimated';;
 
@@ -30,53 +30,55 @@ const Home = () => {
   const bottomSheet = useRef();
   const backgroundOpacity = new Animated.Value(1);
 
-  return <>
-    <StatusBar
-      barStyle='dark-content'
-      backgroundColor={colorScheme.background}
-    />
-    <>
-      <BottomOptions
-        reference={bottomSheet}
-        callback={backgroundOpacity}
+  return (
+    <KeyboardFix>
+      <StatusBar
+        barStyle='dark-content'
+        backgroundColor={colorScheme.background}
       />
-      <Blackout
-        onPress={() => {
-          bottomSheet.current.snapTo(1);
-          Keyboard.dismiss();
-        }}
-      >
-        <Animated.View
-          style={{
-            flex: 1,
-            opacity: Animated.add(0.35, Animated.multiply(backgroundOpacity, 1)),
+      <>
+        <BottomOptions
+          reference={bottomSheet}
+          callback={backgroundOpacity}
+        />
+        <Blackout
+          onPress={() => {
+            bottomSheet.current.snapTo(1);
+            Keyboard.dismiss();
           }}
         >
-          <SafeArea>
-            <Container>
-              <Header>
-                <Title>ZEUS</Title>
-              </Header>
-              <ImageContainer>
-                <Image
-                  source={require('../../../assets/dog.png')}
-                  style={{ height: 240, width: 328 }}
+          <Animated.View
+            style={{
+              flex: 1,
+              opacity: Animated.add(0.35, Animated.multiply(backgroundOpacity, 1)),
+            }}
+          >
+            <SafeArea>
+              <Container>
+                <Header>
+                  <Title>ZEUS</Title>
+                </Header>
+                <ImageContainer>
+                  <Image
+                    source={require('../../../assets/dog.png')}
+                    style={{ height: 240, width: 328 }}
+                  />
+                </ImageContainer>
+                <Actions
+                  selectedCard={selectedCard}
+                  delaySelectedCard={delaySelectedCard}
+                  bottomSheet={bottomSheet}
+                  snapPosition={snapPosition}
+                  setSelectedCard={setSelectedCard}
+                  setDelaySelectedCard={setDelaySelectedCard}
                 />
-              </ImageContainer>
-              <Actions
-                selectedCard={selectedCard}
-                delaySelectedCard={delaySelectedCard}
-                bottomSheet={bottomSheet}
-                snapPosition={snapPosition}
-                setSelectedCard={setSelectedCard}
-                setDelaySelectedCard={setDelaySelectedCard}
-              />
-            </Container>
-          </SafeArea>
-        </Animated.View>
-      </Blackout>
-    </>
-  </>
+              </Container>
+            </SafeArea>
+          </Animated.View>
+        </Blackout>
+      </>
+    </KeyboardFix>
+  );
 }
 
 export default Home;
