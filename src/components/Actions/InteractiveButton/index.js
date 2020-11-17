@@ -21,8 +21,7 @@ const InteractiveButton = (props) => {
     delaySelectedCard, 
     selectedCard,
     width,
-    bottomSheet,
-    snapPosition,
+    bottomSheet
   } = props;
 
   const Icon = () => {

@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   KeyboardAvoidingView, 
-  Platform 
+  Platform,
+  Animated
 } from "react-native";
 
 export const colorScheme = {
@@ -28,4 +29,18 @@ export const KeyboardFix = ({ children }) => {
   } else {
     return children;
   }
+}
+
+export const springAnimation = (animatedValue, toValue) => {
+  return Animated.spring(animatedValue, {
+    toValue,
+    useNativeDriver: false
+  });
+}
+
+export const timingAnimation = (animatedValue, toValue, timing) => {
+  return Animated.timing(animatedValue, {
+    toValue,
+    timing
+  });
 }

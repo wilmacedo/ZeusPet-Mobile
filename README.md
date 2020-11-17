@@ -9,10 +9,11 @@ Desafio proposto por BlueLab para ser utilizado como treinamento de diversas fer
 ## Ideias
 - [ ] Registro de gastos
 - [ ] Histórico de gastos
+- [ ] Charts para histórico
 - [ ] Múltiplos pets
 
 ## Tecnologias Utilizadas
 
 - React Native
+- Expo
 - MongoDB
-- ReactJS

@@ -32,17 +32,17 @@ export const AddButtonContainer = styled.View`
   align-items: center;
 `;
 
-export const AddButtonBox = styled.TouchableOpacity`
-  height: 60px;
-  width: 150px;
-  background-color: ${colorScheme.black};
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-`;
+export const AddButtonBox = {
+  height: 60,
+  width: 150,
+  backgroundColor: colorScheme.black,
+  borderRadius: 25,
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
-export const AddButtonText = styled.Text`
-  font-family: 'light';
-  color: ${colorScheme.background};
-  font-size: 20px;
-`;
+export const AddButtonText = {
+  fontFamily: 'light',
+  color: colorScheme.background,
+  fontSize: 20
+}

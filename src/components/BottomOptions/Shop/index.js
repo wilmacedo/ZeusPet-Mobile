@@ -1,17 +1,19 @@
 import React from 'react';
 
-import { 
+import {
     FormDateContainer,
     FormTimeText,
     FormDayContainer,
     FormDayText
- } from './styles';
+} from './styles';
 
-import moment from 'moment';
-
-const Shop = () => {
-    const hourValue = moment().format('h');
-    const minValue = moment().format('m');
+const Shop = (props) => {
+    const {
+        hourValue,
+        setHourValue,
+        minValue,
+        setMinValue
+    } = props;
 
     return (
         <FormDateContainer>
@@ -19,6 +21,7 @@ const Shop = () => {
                 value={hourValue}
                 keyboardType={'numeric'}
                 maxLength={2}
+                onChangeText={(value) => setHourValue(value)}
             />
             <FormTimeText
                 value={':'}
@@ -28,6 +31,7 @@ const Shop = () => {
                 value={minValue}
                 keyboardType={'numeric'}
                 maxLength={2}
+                onChangeText={(value) => setMinValue(value)}
             />
             <FormDayContainer>
                 <FormDayText
