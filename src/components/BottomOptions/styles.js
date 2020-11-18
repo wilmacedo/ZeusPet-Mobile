@@ -38,11 +38,11 @@ export const AddButtonBox = {
   backgroundColor: colorScheme.black,
   borderRadius: 25,
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'center'
 }
 
-export const AddButtonText = {
-  fontFamily: 'light',
-  color: colorScheme.background,
-  fontSize: 20
-}
+export const AddButtonText = styled.Text`
+  font-family: 'light';
+  color: ${colorScheme.background};
+  font-size: 20px;
+`;

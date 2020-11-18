@@ -24,4 +24,5 @@ export const FormDayText = styled.TextInput`
   font-family: 'regular';
   font-size: 22px;
   color: ${colorScheme.fontLight};
+  text-transform: capitalize;
 `;

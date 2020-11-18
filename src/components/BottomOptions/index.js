@@ -17,14 +17,18 @@ import {
   AddButtonText
 } from './styles';
 
-import { springAnimation } from '../../utils';
+import { colorScheme, springAnimation } from '../../utils';
 
 import Shop from './Shop';
 import Stats from './Stats';
 
+import { AntDesign } from '@expo/vector-icons';
+
 import BottomSheet from 'reanimated-bottom-sheet';
 import moment from 'moment';
-import { spring } from 'react-native-reanimated';
+import 'moment/locale/pt-br';
+
+moment.locale('pt-br');
 
 const BottomOptions = (props) => {
   const {
@@ -32,29 +36,30 @@ const BottomOptions = (props) => {
     callback
   } = props;
 
-  const [hourValue, setHourValue] = useState(moment().format('h'));
+  const [hourValue, setHourValue] = useState(moment().format('HH'));
   const [minValue, setMinValue] = useState(moment().format('m'));
+  const [dayValue, setDayValue] = useState(moment().format('Do'));
+  const [monthValue, setMonthValue] = useState(moment().format('MMMM'));
 
   const [width, setWidth] = useState(new Animated.Value(150));
-  const [opacity, setOpacity] = useState(new Animated.Value(20));
-  const [addButtonValue, setAddButtonValue] = useState('Adicionar');
+  const [scale, setScale] = useState(new Animated.Value(1));
 
-  const [test, setTest] = useState(false);
+  const [textChange, setTextChange] = useState(false);
 
   const closeAnimation = () => {
     springAnimation(width, 80).start();
-    springAnimation(opacity, 0).start(() => {
-      setAddButtonValue('OK');
-      springAnimation(opacity, 1).start(() => setTest(true));
+    springAnimation(scale, 0).start(() => {
+      springAnimation(scale, 1).start();
+      setTextChange(true);
     });
   }
 
   const openAnimation = () => {
     springAnimation(width, 150).start();
-    springAnimation(opacity, 0).start(() => {
-      setAddButtonValue('Adicionar');
-      springAnimation(opacity, 1).start(() => setTest(false));
-    })
+    springAnimation(scale, 0).start(() => {
+      springAnimation(scale, 1).start();
+      setTextChange(false);
+    });
   }
 
   const renderHeader = () => {
@@ -83,22 +88,40 @@ const BottomOptions = (props) => {
                 setHourValue={setHourValue}
                 minValue={minValue}
                 setMinValue={setMinValue}
+                dayValue={dayValue}
+                setDayValue={setDayValue}
+                monthValue={monthValue}
+                setMonthValue={setMonthValue}
               />
               <Stats />
               <AddButtonContainer>
                 <TouchableWithoutFeedback
                   onPress={() => {
-                    test ? openAnimation() : closeAnimation();
+                    textChange ? openAnimation() : closeAnimation();
                   }}
                 >
                   <Animated.View
                     style={[AddButtonBox, { width }]}
                   >
-                    <Animated.Text
-                      style={[AddButtonText, { opacity }]}
+                    <Animated.View
+                      style={{
+                        transform: [{
+                          scaleX: scale
+                        }, {
+                          scaleY: scale
+                        }]
+                      }}
                     >
-                      {addButtonValue}
-                    </Animated.Text>
+                      {!textChange ? <AddButtonText>
+                        Adicionar
+                      </AddButtonText> :
+                        <AntDesign 
+                          name="check" 
+                          size={24}
+                          color={colorScheme.background}
+                        />
+                      }
+                    </Animated.View>
                   </Animated.View>
                 </TouchableWithoutFeedback>
               </AddButtonContainer>

@@ -12,7 +12,10 @@ const Shop = (props) => {
         hourValue,
         setHourValue,
         minValue,
-        setMinValue
+        setMinValue,
+        dayValue,
+        setDayValue,
+        monthValue
     } = props;
 
     return (
@@ -38,12 +41,13 @@ const Shop = (props) => {
                     style={{
                         fontSize: 25
                     }}
-                    value={'30'}
+                    value={dayValue}
                     maxLength={2}
                     keyboardType={'numeric'}
+                    onChangeText={(value) => setDayValue(value)}
                 />
                 <FormDayText
-                    value={'Abril'}
+                    value={monthValue}
                 />
             </FormDayContainer>
         </FormDateContainer>
