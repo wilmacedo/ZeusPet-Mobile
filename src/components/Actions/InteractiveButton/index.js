@@ -12,13 +12,15 @@ import {
   ActionButtonStyle
 } from './styles';
 
+import { getLastItem } from '../../../api';
+
 import { colorScheme } from '../../../utils';
 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 
 const InteractiveButton = (props) => {
-  const { 
-    delaySelectedCard, 
+  const {
+    delaySelectedCard,
     selectedCard,
     width,
     bottomSheet
@@ -46,7 +48,7 @@ const InteractiveButton = (props) => {
     <Container>
       <BoxContainer>
         <Icon />
-        <BoxText>Nada aqui ainda :|</BoxText>
+        <BoxText>{getLastItem().toString()}</BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {
