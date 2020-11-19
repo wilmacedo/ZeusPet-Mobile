@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '../../../utils';
+import { colorScheme } from '~/utils';
 
 export const FormValueContainer = styled.View`
   margin: 20px 0 0 30px;

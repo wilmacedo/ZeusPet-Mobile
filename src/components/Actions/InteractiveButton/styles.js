@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '../../../utils';
+import { colorScheme } from '~/utils';
 
 export const Container = styled.View`
   margin: 40px 30px 0 30px;

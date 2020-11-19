@@ -1,28 +1,48 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '../../../utils'; 
+import { colorScheme } from '~/utils';
 
-export const FormDateContainer = styled.View`
-  flex-direction: row;
+export const HeaderContainer = styled.View`
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  height: 40px;
   align-items: center;
-  margin-left: 30px;
-`;
-
-export const FormTimeText = styled.TextInput`
-  color: ${colorScheme.black};
-  font-family: 'bold';
-  font-size: 60px;
-`;
-
-export const FormDayContainer = styled.View`
   justify-content: center;
-  bottom: 4px;
+  background-color: ${colorScheme.background};
 `;
 
-export const FormDayText = styled.TextInput`
-  padding-left: 15px;
-  font-family: 'regular';
-  font-size: 22px;
-  color: ${colorScheme.fontLight};
-  text-transform: capitalize;
+export const HandlerContainer = styled.View`
+  border-radius: 30px;
+  background-color: ${colorScheme.unselected};
+  height: 5px;
+  width: 50px;
+`;
+
+export const Container = styled.View`
+  height: 600px;
+  background-color: ${colorScheme.background};
+`;
+
+export const FormContainer = styled.View`
+  padding: 10px;
+`;
+
+export const AddButtonContainer = styled.View`
+  margin-top: 15px;
+  align-items: center;
+`;
+
+export const AddButtonBox = {
+  height: 60,
+  width: 150,
+  backgroundColor: colorScheme.black,
+  borderRadius: 25,
+  justifyContent: 'center',
+  alignItems: 'center'
+}
+
+export const AddButtonText = styled.Text`
+  font-family: 'light';
+  color: ${colorScheme.background};
+  font-size: 20px;
 `;

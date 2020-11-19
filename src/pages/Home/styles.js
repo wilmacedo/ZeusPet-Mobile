@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '../../utils';
+import { colorScheme } from '~/utils';
 
 export const Blackout = styled.TouchableWithoutFeedback`
   flex: 1;
