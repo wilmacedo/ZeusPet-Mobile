@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Animated } from 'react-native';
 
@@ -12,7 +12,7 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { getLastItem } from '../../../api';
+import { getLastItem } from '../../../services';
 
 import { colorScheme } from '../../../utils';
 
@@ -25,6 +25,8 @@ const InteractiveButton = (props) => {
     width,
     bottomSheet
   } = props;
+
+  console.log(getLastItem());
 
   const Icon = () => {
     if (delaySelectedCard == 'store') {
@@ -48,7 +50,7 @@ const InteractiveButton = (props) => {
     <Container>
       <BoxContainer>
         <Icon />
-        <BoxText>{getLastItem().toString()}</BoxText>
+        <BoxText>{'oi'}</BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {
