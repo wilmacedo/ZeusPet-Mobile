@@ -1,16 +1,13 @@
 const basicUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
 
-export const getLastItem = () => {
+export const getLastItem = (setValue, setLoading) => {
   const url = basicUrl + '/items/last';
 
-  return fetch(url, {
+  fetch(url, {
     method: 'GET'
   })
     .then((response) => response.json())
-    .then((data) => {
-      return data[0].title;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((data) => setValue(data[0].title))
+    .catch((error) => console.log(error))
+    .finally(() => setLoading(true));
 }

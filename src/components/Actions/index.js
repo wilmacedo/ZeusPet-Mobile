@@ -4,7 +4,7 @@ import { Animated } from 'react-native';
 
 import { CardContainer } from './styles';
 
-import { springAnimation } from '../../utils';
+import { springAnimation } from '~/utils';
 
 import Card from './Card';
 import BottomInfo from './InteractiveButton';

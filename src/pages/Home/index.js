@@ -15,10 +15,10 @@ import {
   ImageContainer,
 } from './styles';
 
-import Actions from '../../components/Actions';
-import BottomOptions from '../../components/BottomOptions';
+import Actions from '~/components/Actions';
+import BottomOptions from '~/components/BottomOptions';
 
-import { colorScheme, KeyboardFix } from '../../utils';
+import { colorScheme, KeyboardFix } from '~/utils';
 
 import Animated from 'react-native-reanimated';;
 
@@ -40,6 +40,7 @@ const Home = () => {
         <BottomOptions
           reference={bottomSheet}
           callback={backgroundOpacity}
+          selectedCard={selectedCard}
         />
         <Blackout
           onPress={() => {

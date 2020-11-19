@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Animated } from 'react-native';
 
@@ -12,9 +12,9 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { getLastItem } from '../../../services';
+import { getLastItem } from '~/services';
 
-import { colorScheme } from '../../../utils';
+import { colorScheme } from '~/utils';
 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 
@@ -26,7 +26,14 @@ const InteractiveButton = (props) => {
     bottomSheet
   } = props;
 
-  console.log(getLastItem());
+  const [lastItem, setLastItem] = useState('Nada por aqui :|');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) console.log(loading);
+  })
+
+  getLastItem(setLastItem, setLoading);
 
   const Icon = () => {
     if (delaySelectedCard == 'store') {
@@ -50,7 +57,7 @@ const InteractiveButton = (props) => {
     <Container>
       <BoxContainer>
         <Icon />
-        <BoxText>{'oi'}</BoxText>
+        <BoxText>Último item: {lastItem}</BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {

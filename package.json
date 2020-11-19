@@ -12,6 +12,7 @@
     "@react-navigation/native": "^5.8.9",
     "@react-navigation/stack": "^5.12.6",
     "axios": "^0.21.0",
+    "babel-plugin-root-import": "^6.6.0",
     "expo": "^39.0.4",
     "expo-status-bar": "~1.0.2",
     "moment": "^2.29.1",

@@ -5,7 +5,7 @@ import { CardContainer } from './styles';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { colorScheme } from '../../../utils';
+import { colorScheme } from '~/utils';
 
 const Card = (props) => {
   const {
