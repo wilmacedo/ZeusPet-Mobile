@@ -17,7 +17,6 @@ import { getLastItem } from '~/services';
 import { colorScheme } from '~/utils';
 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
-import { setEnabled } from 'react-native/Libraries/Performance/Systrace';
 
 const InteractiveButton = (props) => {
   const {
@@ -28,14 +27,10 @@ const InteractiveButton = (props) => {
   } = props;  
 
   let standardText = 'Nada por aqui :|';
-  const [lastItem, setLastItem] = useState(standardText);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (selectedCard == 'store') {
-      getLastItem(setLastItem, setLoading);
-    }
-  })
+  const [shopItem, setShopItem] = useState(standardText);
+  const [statsItem, setStatsItem] = useState(standardText);
+  
+  getLastItem(setShopItem);
 
   const Icon = () => {
     if (delaySelectedCard == 'store') {
@@ -59,11 +54,9 @@ const InteractiveButton = (props) => {
     <Container>
       <BoxContainer>
         <Icon />
-        <BoxText
-          style={{
-            fontSize: lastItem == standardText ? 14 : 16
-          }}
-        >{lastItem}</BoxText>
+        <BoxText>
+          {delaySelectedCard == 'store' ? shopItem : statsItem}
+        </BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {

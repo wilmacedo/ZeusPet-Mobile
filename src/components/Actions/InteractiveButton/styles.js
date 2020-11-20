@@ -23,7 +23,7 @@ export const BoxText = styled.Text`
   max-width: 130px;
   color: ${colorScheme.black};
   font-family: 'regular';
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 export const ActionButtonStyle = {

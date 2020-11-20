@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 
 import {
-    HeaderContainer,
-    HandlerContainer,
     Container,
     FormContainer,
     AddButtonBox,
@@ -24,18 +22,12 @@ import Parameters from './Parameters';
 
 import { AntDesign } from '@expo/vector-icons';
 
-import BottomSheet from 'reanimated-bottom-sheet';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
 moment.locale('pt-br');
 
-const Shop = (props) => {
-    const {
-        reference,
-        callback
-    } = props;
-
+const Shop = () => {
     const [hourValue, setHourValue] = useState(moment().format('HH'));
     const [minValue, setMinValue] = useState(moment().format('m'));
     const [dayValue, setDayValue] = useState(moment().format('Do'));
@@ -62,86 +54,60 @@ const Shop = (props) => {
         });
     }
 
-    const renderHeader = () => {
-        return (
+    return (
+        <KeyboardAvoidingView
+        >
             <TouchableWithoutFeedback
                 onPress={() => Keyboard.dismiss()}
             >
-                <HeaderContainer>
-                    <HandlerContainer />
-                </HeaderContainer>
-            </TouchableWithoutFeedback>
-        );
-    }
-
-    const renderContent = () => {
-        return (
-            <KeyboardAvoidingView
-            >
-                <TouchableWithoutFeedback
-                    onPress={() => Keyboard.dismiss()}
-                >
-                    <Container>
-                        <FormContainer>
-                            <Date
-                                hourValue={hourValue}
-                                setHourValue={setHourValue}
-                                minValue={minValue}
-                                setMinValue={setMinValue}
-                                dayValue={dayValue}
-                                setDayValue={setDayValue}
-                                monthValue={monthValue}
-                                setMonthValue={setMonthValue}
-                            />
-                            <Parameters />
-                            <AddButtonContainer>
-                                <TouchableWithoutFeedback
-                                    onPress={() => {
-                                        textChange ? openAnimation() : closeAnimation();
-                                    }}
+                <Container>
+                    <FormContainer>
+                        <Date
+                            hourValue={hourValue}
+                            setHourValue={setHourValue}
+                            minValue={minValue}
+                            setMinValue={setMinValue}
+                            dayValue={dayValue}
+                            setDayValue={setDayValue}
+                            monthValue={monthValue}
+                            setMonthValue={setMonthValue}
+                        />
+                        <Parameters />
+                        <AddButtonContainer>
+                            <TouchableWithoutFeedback
+                                onPress={() => {
+                                    textChange ? openAnimation() : closeAnimation();
+                                }}
+                            >
+                                <Animated.View
+                                    style={[AddButtonBox, { width }]}
                                 >
                                     <Animated.View
-                                        style={[AddButtonBox, { width }]}
+                                        style={{
+                                            transform: [{
+                                                scaleX: scale
+                                            }, {
+                                                scaleY: scale
+                                            }]
+                                        }}
                                     >
-                                        <Animated.View
-                                            style={{
-                                                transform: [{
-                                                    scaleX: scale
-                                                }, {
-                                                    scaleY: scale
-                                                }]
-                                            }}
-                                        >
-                                            {!textChange ? <AddButtonText>
-                                                Adicionar
-                        </AddButtonText> :
-                                                <AntDesign
-                                                    name="check"
-                                                    size={24}
-                                                    color={colorScheme.background}
-                                                />
-                                            }
-                                        </Animated.View>
+                                        {!textChange ? <AddButtonText>
+                                            Adicionar
+                    </AddButtonText> :
+                                            <AntDesign
+                                                name="check"
+                                                size={24}
+                                                color={colorScheme.background}
+                                            />
+                                        }
                                     </Animated.View>
-                                </TouchableWithoutFeedback>
-                            </AddButtonContainer>
-                        </FormContainer>
-                    </Container>
-                </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
-        );
-    }
-
-    return (
-        <BottomSheet
-            ref={reference}
-            snapPoints={[450, 0]}
-            initialSnap={1}
-            renderContent={renderContent}
-            renderHeader={renderHeader}
-            enabledContentGestureInteraction={false}
-            callbackNode={callback}
-        />
+                                </Animated.View>
+                            </TouchableWithoutFeedback>
+                        </AddButtonContainer>
+                    </FormContainer>
+                </Container>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 }
 
