@@ -15,7 +15,7 @@ import {
     AddButtonText
 } from './styles';
 
-import { colorScheme, springAnimation } from '~/utils';
+import { colorSchema, springAnimation } from '~/utils';
 
 import Date from './Date';
 import Parameters from './Parameters';
@@ -97,7 +97,7 @@ const Store = () => {
                                             <AntDesign
                                                 name="check"
                                                 size={24}
-                                                color={colorScheme.background}
+                                                color={colorSchema.background}
                                             />
                                         }
                                     </Animated.View>

@@ -15,8 +15,10 @@ export const getLastItem = (setValue) => {
     .finally(() => loadSuccess());
 }
 
-export const getAllItems = (setData) => {
-  const url = baseUrl = '/';
+export const getAllItems = (setData, refresh, setRefresh) => {
+  const url = baseUrl + '/';
+
+  if (refresh != null) setRefresh(true);
 
   fetch(url, {
     method: 'GET'
@@ -24,5 +26,5 @@ export const getAllItems = (setData) => {
     .then((response) => response.json())
     .then((data) => setData(data))
     .catch((error) => console.log(error))
-    .finally(() => console.log('[Services] Loaded'))
+    .finally(() => { if (refresh != null) setRefresh(false);})
 }

@@ -11,23 +11,25 @@ import {
 import { AntDesign } from '@expo/vector-icons'; 
 import { colorSchema } from '~/utils';
 
+import moment from 'moment';
+
 const Item = (props) => {
   const {
     title,
     date,
     value
   } = props;
-  
+
   return (
     <Container>
       <Title>{title}</Title>
       <DateContainer>
-        <AntDesign 
+        <AntDesign
           name="clockcircleo" 
           size={14} 
           color={colorSchema.fontLight}
         />
-        <Date>{date}</Date>
+        <Date>{moment(date).format('hh:mm')} - {moment(date).format('D')} de {moment(date).format('MMMM')}</Date>
       </DateContainer>
       <Value>R${value}</Value>
     </Container>

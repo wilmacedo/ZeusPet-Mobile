@@ -11,6 +11,7 @@ export const Container = styled.View`
     width: ${width}px;
     background-color: ${colorSchema.backgroundLight};
     border-radius: 20px;
+    margin-bottom: 15px;
 `;
 
 export const Title = styled.Text`

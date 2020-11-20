@@ -52,7 +52,7 @@ const BottomOptions = (props) => {
       initialSnap={1}
       renderHeader={renderHeader}
       renderContent={renderContent}
-      enabledContentGestureInteraction={false}
+      enabledGestureInteraction={selectedCard == 'store' ? false : true}
       callbackNode={callback}
     />
   );
