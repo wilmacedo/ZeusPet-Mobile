@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 export const Blackout = styled.TouchableWithoutFeedback`
   flex: 1;
@@ -9,7 +9,7 @@ export const Blackout = styled.TouchableWithoutFeedback`
 
 export const SafeArea = styled.SafeAreaView`
   flex: 1;
-  background-color: ${colorScheme.background};
+  background-color: ${colorSchema.background};
 `;
 
 export const Container = styled.View`
@@ -26,7 +26,7 @@ export const Header = styled.View`
 export const Title = styled.Text`
   font-weight: bold;
   font-size: 40px;
-  color: ${colorScheme.black};
+  color: ${colorSchema.black};
   font-family: 'light';
   letter-spacing: 6px;
 `;

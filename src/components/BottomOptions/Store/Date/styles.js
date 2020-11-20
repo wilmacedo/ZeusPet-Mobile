@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils'; 
+import { colorSchema } from '~/utils'; 
 
 export const FormDateContainer = styled.View`
   flex-direction: row;
@@ -9,7 +9,7 @@ export const FormDateContainer = styled.View`
 `;
 
 export const FormTimeText = styled.TextInput`
-  color: ${colorScheme.black};
+  color: ${colorSchema.black};
   font-family: 'bold';
   font-size: 60px;
 `;
@@ -23,6 +23,6 @@ export const FormDayText = styled.TextInput`
   padding-left: 15px;
   font-family: 'regular';
   font-size: 22px;
-  color: ${colorScheme.fontLight};
+  color: ${colorSchema.fontLight};
   text-transform: capitalize;
 `;

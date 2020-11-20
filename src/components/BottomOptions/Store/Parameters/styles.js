@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 export const FormValueContainer = styled.View`
   margin: 20px 0 0 30px;
@@ -9,7 +9,7 @@ export const FormValueContainer = styled.View`
 export const FormValueBox = styled.View`
   height: 70px;
   width: 320px;
-  border-color: ${colorScheme.unselected};
+  border-color: ${colorSchema.unselected};
   border-width: 1px;
   border-radius: 25px;
   padding-left: 10px;
@@ -24,13 +24,13 @@ export const IconContainer = styled.View`
 
 export const FormValueText = styled.TextInput`
   margin-top: 3px;
-  color: ${colorScheme.black};
+  color: ${colorSchema.black};
   font-size: 25px;
   font-family: 'light';
 `;
 
 export const FormMoneySymbol = styled.Text`
-  color: ${colorScheme.black};
+  color: ${colorSchema.black};
   font-size: 25px;
   font-family: 'light';
   margin-right: 3px;

@@ -5,7 +5,7 @@ import { CardContainer } from './styles';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 const Card = (props) => {
   const {
@@ -15,19 +15,19 @@ const Card = (props) => {
     margin
   } = props;
 
-  const [borderColor, setBorderColor] = useState(colorScheme.unselected);
-  const [backgroundColor, setBackgroundColor] = useState(colorScheme.background);
-  const [iconColor, setIconColor] = useState(colorScheme.black);
+  const [borderColor, setBorderColor] = useState(colorSchema.unselected);
+  const [backgroundColor, setBackgroundColor] = useState(colorSchema.background);
+  const [iconColor, setIconColor] = useState(colorSchema.black);
 
   useEffect(() => {
     if (selectedCard == name) {
-      setBorderColor(colorScheme.black);
-      setBackgroundColor(colorScheme.black);
-      setIconColor(colorScheme.background);
+      setBorderColor(colorSchema.black);
+      setBackgroundColor(colorSchema.black);
+      setIconColor(colorSchema.background);
     } else {
-      setBorderColor(colorScheme.unselected);
-      setBackgroundColor(colorScheme.background);
-      setIconColor(colorScheme.black);
+      setBorderColor(colorSchema.unselected);
+      setBackgroundColor(colorSchema.background);
+      setIconColor(colorSchema.black);
     }
   });
 

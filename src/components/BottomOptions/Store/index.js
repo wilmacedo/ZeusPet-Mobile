@@ -27,7 +27,7 @@ import 'moment/locale/pt-br';
 
 moment.locale('pt-br');
 
-const Shop = () => {
+const Store = () => {
     const [hourValue, setHourValue] = useState(moment().format('HH'));
     const [minValue, setMinValue] = useState(moment().format('m'));
     const [dayValue, setDayValue] = useState(moment().format('Do'));
@@ -111,4 +111,4 @@ const Shop = () => {
     );
 }
 
-export default Shop;
+export default Store;

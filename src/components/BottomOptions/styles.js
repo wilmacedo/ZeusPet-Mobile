@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 export const HeaderContainer = styled.View`
   border-top-left-radius: 30px;
@@ -8,17 +8,17 @@ export const HeaderContainer = styled.View`
   height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: ${colorScheme.background};
+  background-color: ${colorSchema.background};
 `;
 
 export const HandlerContainer = styled.View`
   border-radius: 30px;
-  background-color: ${colorScheme.unselected};
+  background-color: ${colorSchema.unselected};
   height: 5px;
   width: 50px;
 `;
 
 export const Container = styled.View`
   height: 600px;
-  background-color: ${colorScheme.background};
+  background-color: ${colorSchema.background};
 `;

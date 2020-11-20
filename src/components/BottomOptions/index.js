@@ -11,7 +11,8 @@ import {
   Container
 } from './styles';
 
-import Shop from './Shop';
+import Store from './Store';
+import Stats from './Stats';
 
 import BottomSheet from 'reanimated-bottom-sheet';
 
@@ -36,9 +37,9 @@ const BottomOptions = (props) => {
 
   const renderContent = () => {
     if (selectedCard == 'store') {
-      return <Shop />;
+      return <Store />;
     } else if (selectedCard == 'stats') {
-      return <Container />
+      return <Stats />
     } else {
       return <Container />
     }

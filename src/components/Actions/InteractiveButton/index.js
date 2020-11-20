@@ -14,7 +14,7 @@ import {
 
 import { getLastItem } from '~/services';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 
@@ -37,13 +37,13 @@ const InteractiveButton = (props) => {
       return <MaterialIcons
         name='pets'
         size={24}
-        color={colorScheme.black}
+        color={colorSchema.black}
       />
     } else if (delaySelectedCard == 'stats') {
       return <Feather
         name='calendar'
         size={24}
-        color={colorScheme.black}
+        color={colorSchema.black}
       />
     }
 

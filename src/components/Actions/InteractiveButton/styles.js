@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 export const Container = styled.View`
   margin: 40px 30px 0 30px;
@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const BoxContainer = styled.View`
   height: 60px;
   width: 270px;
-  border-color: ${colorScheme.unselected};
+  border-color: ${colorSchema.unselected};
   border-width: 1px;
   border-radius: 25px;
   padding-left: 10px;
@@ -21,7 +21,7 @@ export const BoxContainer = styled.View`
 export const BoxText = styled.Text`
   margin: 3px 0 0 10px;
   max-width: 130px;
-  color: ${colorScheme.black};
+  color: ${colorSchema.black};
   font-family: 'regular';
   font-size: 16px;
 `;
@@ -30,7 +30,7 @@ export const ActionButtonStyle = {
   height: 60,
   width: 292,
   borderRadius: 25,
-  backgroundColor: colorScheme.black,
+  backgroundColor: colorSchema.black,
   position: 'absolute',
   right: 0,
   justifyContent: 'center',
@@ -40,5 +40,5 @@ export const ActionButtonStyle = {
 export const ActionButtonText = styled.Text`
   font-family: 'light';
   font-size: 18px;
-  color: ${colorScheme.background};
+  color: ${colorSchema.background};
 `;

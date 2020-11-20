@@ -18,7 +18,7 @@ import {
 import Actions from '~/components/Actions';
 import BottomOptions from '~/components/BottomOptions';
 
-import { colorScheme, KeyboardFix } from '~/utils';
+import { colorSchema, KeyboardFix } from '~/utils';
 
 import Animated from 'react-native-reanimated';;
 
@@ -34,7 +34,7 @@ const Home = () => {
     <KeyboardFix>
       <StatusBar
         barStyle='dark-content'
-        backgroundColor={colorScheme.background}
+        backgroundColor={colorSchema.background}
       />
       <>
         <BottomOptions

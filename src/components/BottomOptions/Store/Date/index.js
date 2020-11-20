@@ -7,7 +7,7 @@ import {
     FormDayText
 } from './styles';
 
-const Shop = (props) => {
+const Date = (props) => {
     const {
         hourValue,
         setHourValue,
@@ -54,4 +54,4 @@ const Shop = (props) => {
     );
 }
 
-export default Shop;
+export default Date;

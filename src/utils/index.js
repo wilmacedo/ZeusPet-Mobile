@@ -6,12 +6,13 @@ import {
   Animated
 } from "react-native";
 
-export const colorScheme = {
+export const colorSchema = {
   background: '#fff',
   black: '#000000',
   unselected: '#e8e8e8',
   fontLight: '#a7a7a7',
   backgroundLight: '#f2f2f2',
+  money: '#00cc00'
 };
 
 export const KeyboardFix = ({ children }) => {

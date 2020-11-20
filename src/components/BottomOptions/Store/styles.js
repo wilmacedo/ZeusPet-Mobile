@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colorScheme } from '~/utils';
+import { colorSchema } from '~/utils';
 
 export const HeaderContainer = styled.View`
   border-top-left-radius: 30px;
@@ -8,19 +8,19 @@ export const HeaderContainer = styled.View`
   height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: ${colorScheme.background};
+  background-color: ${colorSchema.background};
 `;
 
 export const HandlerContainer = styled.View`
   border-radius: 30px;
-  background-color: ${colorScheme.unselected};
+  background-color: ${colorSchema.unselected};
   height: 5px;
   width: 50px;
 `;
 
 export const Container = styled.View`
   height: 600px;
-  background-color: ${colorScheme.background};
+  background-color: ${colorSchema.background};
 `;
 
 export const FormContainer = styled.View`
@@ -35,7 +35,7 @@ export const AddButtonContainer = styled.View`
 export const AddButtonBox = {
   height: 60,
   width: 150,
-  backgroundColor: colorScheme.black,
+  backgroundColor: colorSchema.black,
   borderRadius: 25,
   justifyContent: 'center',
   alignItems: 'center'
@@ -43,6 +43,6 @@ export const AddButtonBox = {
 
 export const AddButtonText = styled.Text`
   font-family: 'light';
-  color: ${colorScheme.background};
+  color: ${colorSchema.background};
   font-size: 20px;
 `;
