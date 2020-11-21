@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Keyboard, 
-  KeyboardAvoidingView, 
-  TouchableOpacity, 
+
+import {
+  Keyboard,
+  KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  View
+  TouchableOpacity,
+  ActivityIndicator,
+  Platform,
 } from 'react-native';
 
-import { 
+import {
   Container,
   OptionContainer,
   OptionText,
-  ItemList
+  ItemList,
+  LoadingView
 } from './styles';
 
 import { colorSchema } from '~/utils';
 
 import Item from './Item';
 import { getAllItems } from '~/services';
+
+import { FlatList } from 'react-native-gesture-handler';
 
 const Stats = () => {
   const [selectedOption, setSelectedOption] = useState('hist');
@@ -31,12 +36,42 @@ const Stats = () => {
 
   useEffect(() => {
     if (!loading) {
-      getAllItems(setData);
-      setLoading(true);
+      getAllItems(setData, setLoading);
     }
   });
 
-  console.log(data);
+  const dataa = [
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+    {
+      title: 'teste',
+      date: '2020-11-17T13:53:30.928Z',
+      value: 30
+    },
+  ];
 
   const renderItem = ({ item }) => {
     const {
@@ -64,7 +99,10 @@ const Stats = () => {
             <OptionContainer>
               <TouchableOpacity
                 onPress={() => {
-                  if (selectedOption != 'hist') setSelectedOption('hist');
+                  if (selectedOption != 'hist') {
+                    console.log('set to hist');
+                    setSelectedOption('hist');
+                  }
                 }}
               >
                 <OptionText
@@ -77,7 +115,10 @@ const Stats = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  if (selectedOption != 'info') setSelectedOption('info');
+                  if (selectedOption != 'info') {
+                    console.log('set to info');
+                    setSelectedOption('info');
+                  }
                 }}
               >
                 <OptionText
@@ -89,14 +130,21 @@ const Stats = () => {
                 </OptionText>
               </TouchableOpacity>
             </OptionContainer>
-            <ItemList
-              keyExtractor={item => item.id}
-              data={data}
-              renderItem={renderItem}
-              contentContainerStyle={{alignItems: 'center'}}
-              // refreshing={refresh}
-              // onRefresh={getAllItems(setData, refresh, setRefresh)}
-            />
+            {!loading ?
+              <LoadingView>
+                <ActivityIndicator size="large" color="black" />
+              </LoadingView>
+              :
+              <>
+                <FlatList
+                  style={{ marginTop: 10 }}
+                  keyExtractor={item => item.id}
+                  data={dataa}
+                  renderItem={renderItem}
+                  contentContainerStyle={{ alignItems: 'center' }}
+                />
+              </>
+            }
           </>
         </Container>
       </TouchableWithoutFeedback>

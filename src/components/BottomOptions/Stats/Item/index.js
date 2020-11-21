@@ -15,13 +15,14 @@ import moment from 'moment';
 
 const Item = (props) => {
   const {
+    id, 
     title,
     date,
     value
   } = props;
 
   return (
-    <Container>
+    <Container key={id}>
       <Title>{title}</Title>
       <DateContainer>
         <AntDesign
@@ -31,7 +32,7 @@ const Item = (props) => {
         />
         <Date>{moment(date).format('hh:mm')} - {moment(date).format('D')} de {moment(date).format('MMMM')}</Date>
       </DateContainer>
-      <Value>R${value}</Value>
+      <Value>R${value.toFixed(2).replace('.', ',')}</Value>
     </Container>
   );
 }

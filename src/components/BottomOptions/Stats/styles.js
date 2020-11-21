@@ -29,3 +29,9 @@ export const ItemsContainer = styled.View`
 export const ItemList = styled.FlatList`
   margin-top: 10px;
 `;
+
+export const LoadingView = styled.View`
+  flex: 1;
+  align-items: center;
+  margin-top: 120px;
+`;
