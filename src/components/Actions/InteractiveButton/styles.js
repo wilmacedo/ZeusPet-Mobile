@@ -1,15 +1,17 @@
 import styled from 'styled-components/native';
 
+import { Platform } from 'react-native';
+
 import { colorSchema } from '~/utils';
 
 export const Container = styled.View`
-  margin: 40px 30px 0 30px;
+  margin: 40px 0px 0 0px;
   align-items: center;
 `;
 
 export const BoxContainer = styled.View`
   height: 60px;
-  width: 270px;
+  width: 280px;
   border-color: ${colorSchema.unselected};
   border-width: 1px;
   border-radius: 25px;
@@ -27,8 +29,9 @@ export const BoxText = styled.Text`
 `;
 
 export const ActionButtonStyle = {
+  marginRight: Platform.OS == 'android' ? 57 : 48,
   height: 60,
-  width: 292,
+  width: 280,
   borderRadius: 25,
   backgroundColor: colorSchema.black,
   position: 'absolute',

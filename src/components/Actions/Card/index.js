@@ -34,8 +34,10 @@ const Card = (props) => {
   const Icon = () => {
     if (iconType == 'stats') {
       return <Ionicons name='md-stats' size={28} color={iconColor} />;
-    } else {
+    } else if (iconType== 'store') {
       return <MaterialCommunityIcons name="shopping" size={28} color={iconColor} />;
+    } else if (iconType == 'history') {
+      return <MaterialCommunityIcons name={iconType} size={28} color={iconColor} />;
     }
   }
 

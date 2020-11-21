@@ -20,7 +20,7 @@ import BottomOptions from '~/components/BottomOptions';
 
 import { colorSchema, KeyboardFix } from '~/utils';
 
-import Animated from 'react-native-reanimated';;
+import Animated from 'react-native-reanimated';
 
 const Home = () => {
   const [selectedCard, setSelectedCard] = useState('none');
@@ -39,12 +39,11 @@ const Home = () => {
       <>
         <BottomOptions
           reference={bottomSheet}
-          callback={backgroundOpacity}
           selectedCard={selectedCard}
         />
         <Blackout
           onPress={() => {
-            bottomSheet.current.snapTo(1);
+            // bottomSheet.current?.close();
             Keyboard.dismiss();
           }}
         >

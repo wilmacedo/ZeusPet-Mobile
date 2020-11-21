@@ -7,7 +7,7 @@ import { CardContainer } from './styles';
 import { springAnimation } from '~/utils';
 
 import Card from './Card';
-import BottomInfo from './InteractiveButton';
+import InteractiveButton from './InteractiveButton';
 
 const Actions = (props) => {
   const {
@@ -19,7 +19,7 @@ const Actions = (props) => {
     setDelaySelectedCard,
   } = props;
 
-  let standardWidth = Platform.OS === 'ios' ? 292 : 301;
+  let standardWidth = 280;
   const [width, setWidth] = useState(new Animated.Value(standardWidth));
 
   const pressCard = (name) => {
@@ -50,6 +50,15 @@ const Actions = (props) => {
         />
         <Card
           selectedCard={selectedCard}
+          name='history'
+          iconType='history'
+          margin={10}
+          onPress={() => {
+            pressCard('history');
+          }}
+        />
+        <Card
+          selectedCard={selectedCard}
           name='stats'
           iconType='stats'
           onPress={() => {
@@ -57,7 +66,7 @@ const Actions = (props) => {
           }}
         />
       </CardContainer>
-      <BottomInfo
+      <InteractiveButton
         selectedCard={selectedCard}
         delaySelectedCard={delaySelectedCard}
         width={width}

@@ -16,7 +16,8 @@ import { getLastItem } from '~/services';
 
 import { colorSchema } from '~/utils';
 
-import { MaterialIcons, Feather } from '@expo/vector-icons';
+import { MaterialIcons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 const InteractiveButton = (props) => {
   const {
@@ -24,12 +25,13 @@ const InteractiveButton = (props) => {
     selectedCard,
     width,
     bottomSheet
-  } = props;  
+  } = props;
 
-  let standardText = 'Nada por aqui :|';
+  let standardText = 'Nada por aqui';
   const [shopItem, setShopItem] = useState(standardText);
+  const [historyItem, setHistoryItem] = useState(standardText);
   const [statsItem, setStatsItem] = useState(standardText);
-  
+
   getLastItem(setShopItem);
 
   const Icon = () => {
@@ -39,9 +41,15 @@ const InteractiveButton = (props) => {
         size={24}
         color={colorSchema.black}
       />
-    } else if (delaySelectedCard == 'stats') {
+    } else if (delaySelectedCard == 'history') {
       return <Feather
         name='calendar'
+        size={24}
+        color={colorSchema.black}
+      />
+    } else if (delaySelectedCard == 'stats') {
+      return <MaterialCommunityIcons
+        name="chart-timeline-variant"
         size={24}
         color={colorSchema.black}
       />
@@ -50,18 +58,28 @@ const InteractiveButton = (props) => {
     return <></>;
   }
 
+  const renderText = () => {
+    if (delaySelectedCard == 'store') {
+      return shopItem;
+    } else if (delaySelectedCard == 'history') {
+      return historyItem;
+    } else if (delaySelectedCard == 'stats') {
+      return statsItem;
+    }
+  }
+
   return (
     <Container>
       <BoxContainer>
         <Icon />
         <BoxText>
-          {delaySelectedCard == 'store' ? shopItem : statsItem}
+          {renderText()}
         </BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
         onPress={() => {
           if (selectedCard != 'none') {
-            bottomSheet.current.snapTo(0);
+            bottomSheet.current?.open();
           }
         }}
       >
