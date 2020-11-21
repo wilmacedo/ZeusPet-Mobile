@@ -13,7 +13,7 @@ const Actions = (props) => {
   const {
     selectedCard,
     delaySelectedCard,
-    bottomSheet,
+    modalReference,
     snapPosition,
     setSelectedCard,
     setDelaySelectedCard,
@@ -70,7 +70,7 @@ const Actions = (props) => {
         selectedCard={selectedCard}
         delaySelectedCard={delaySelectedCard}
         width={width}
-        bottomSheet={bottomSheet}
+        modalReference={modalReference}
         snapPosition={snapPosition}
       />
     </>

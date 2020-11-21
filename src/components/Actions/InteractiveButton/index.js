@@ -17,14 +17,13 @@ import { getLastItem } from '~/services';
 import { colorSchema } from '~/utils';
 
 import { MaterialIcons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 const InteractiveButton = (props) => {
   const {
     delaySelectedCard,
     selectedCard,
     width,
-    bottomSheet
+    modalReference
   } = props;
 
   let standardText = 'Nada por aqui';
@@ -79,7 +78,7 @@ const InteractiveButton = (props) => {
       <TouchableWithoutFeedback
         onPress={() => {
           if (selectedCard != 'none') {
-            bottomSheet.current?.open();
+            modalReference.current?.open();
           }
         }}
       >

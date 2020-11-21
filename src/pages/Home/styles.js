@@ -2,11 +2,6 @@ import styled from 'styled-components/native';
 
 import { colorSchema } from '~/utils';
 
-export const Blackout = styled.TouchableWithoutFeedback`
-  flex: 1;
-  background-color: #2c2c2f;
-`;
-
 export const SafeArea = styled.SafeAreaView`
   flex: 1;
   background-color: ${colorSchema.background};

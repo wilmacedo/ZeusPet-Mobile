@@ -3,11 +3,9 @@ import React, { useState, useRef } from 'react';
 import {
   StatusBar,
   Image,
-  Keyboard
 } from 'react-native';
 
 import {
-  Blackout,
   SafeArea,
   Container,
   Header,
@@ -16,19 +14,14 @@ import {
 } from './styles';
 
 import Actions from '~/components/Actions';
-import BottomOptions from '~/components/BottomOptions';
+import Modal from '~/components/Modal';
 
 import { colorSchema, KeyboardFix } from '~/utils';
-
-import Animated from 'react-native-reanimated';
 
 const Home = () => {
   const [selectedCard, setSelectedCard] = useState('none');
   const [delaySelectedCard, setDelaySelectedCard] = useState('none');
-
-  const [snapPosition, setSnapPosition] = useState(1);
-  const bottomSheet = useRef();
-  const backgroundOpacity = new Animated.Value(1);
+  const modalReference = useRef();
 
   return (
     <KeyboardFix>
@@ -37,45 +30,30 @@ const Home = () => {
         backgroundColor={colorSchema.background}
       />
       <>
-        <BottomOptions
-          reference={bottomSheet}
+        <Modal
+          reference={modalReference}
           selectedCard={selectedCard}
         />
-        <Blackout
-          onPress={() => {
-            // bottomSheet.current?.close();
-            Keyboard.dismiss();
-          }}
-        >
-          <Animated.View
-            style={{
-              flex: 1,
-              opacity: Animated.add(0.35, Animated.multiply(backgroundOpacity, 1)),
-            }}
-          >
-            <SafeArea>
-              <Container>
-                <Header>
-                  <Title>ZEUS</Title>
-                </Header>
-                <ImageContainer>
-                  <Image
-                    source={require('../../../assets/dog.png')}
-                    style={{ height: 240, width: 328 }}
-                  />
-                </ImageContainer>
-                <Actions
-                  selectedCard={selectedCard}
-                  delaySelectedCard={delaySelectedCard}
-                  bottomSheet={bottomSheet}
-                  snapPosition={snapPosition}
-                  setSelectedCard={setSelectedCard}
-                  setDelaySelectedCard={setDelaySelectedCard}
-                />
-              </Container>
-            </SafeArea>
-          </Animated.View>
-        </Blackout>
+        <SafeArea>
+          <Container>
+            <Header>
+              <Title>ZEUS</Title>
+            </Header>
+            <ImageContainer>
+              <Image
+                source={require('../../../assets/dog.png')}
+                style={{ height: 240, width: 328 }}
+              />
+            </ImageContainer>
+            <Actions
+              selectedCard={selectedCard}
+              delaySelectedCard={delaySelectedCard}
+              modalReference={modalReference}
+              setSelectedCard={setSelectedCard}
+              setDelaySelectedCard={setDelaySelectedCard}
+            />
+          </Container>
+        </SafeArea>
       </>
     </KeyboardFix>
   );
