@@ -2,12 +2,8 @@ import styled from 'styled-components/native';
 
 import { colorSchema } from '~/utils';
 
-export const Container = styled.View`
-  height: 600px;
-  background-color: ${colorSchema.background};
-`;
-
 export const FormContainer = styled.View`
+  margin-top: 20px;
   padding: 10px;
 `;
 

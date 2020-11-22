@@ -17,6 +17,7 @@ const Actions = (props) => {
     snapPosition,
     setSelectedCard,
     setDelaySelectedCard,
+    setCanChangeModal
   } = props;
 
   let standardWidth = 280;
@@ -72,6 +73,7 @@ const Actions = (props) => {
         width={width}
         modalReference={modalReference}
         snapPosition={snapPosition}
+        setCanChangeModal={setCanChangeModal}
       />
     </>
   );

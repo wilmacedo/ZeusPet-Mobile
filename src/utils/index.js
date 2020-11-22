@@ -12,6 +12,7 @@ export const colorSchema = {
   unselected: '#e8e8e8',
   fontLight: '#a7a7a7',
   backgroundLight: '#f2f2f2',
+  historyBackground: '#f6f7fb',
   money: '#00cc00'
 };
 

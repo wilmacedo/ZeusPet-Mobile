@@ -24,7 +24,7 @@ const Home = () => {
   const modalReference = useRef();
 
   return (
-    <KeyboardFix>
+    <>
       <StatusBar
         barStyle='dark-content'
         backgroundColor={colorSchema.background}
@@ -55,7 +55,7 @@ const Home = () => {
           </Container>
         </SafeArea>
       </>
-    </KeyboardFix>
+    </>
   );
 }
 

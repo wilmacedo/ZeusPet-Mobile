@@ -9,7 +9,7 @@ const width = Dimensions.get('window').width - 120;
 export const Container = styled.View`
     height: 80px;
     width: ${width}px;
-    background-color: ${colorSchema.backgroundLight};
+    background-color: ${colorSchema.background};
     border-radius: 20px;
     margin-bottom: 15px;
 `;
