@@ -4,6 +4,8 @@ import { Dimensions } from 'react-native';
 
 import { colorSchema } from '~/utils';
 
+const width = Dimensions.get('window').width - 140;
+
 export const Container = styled.View`
   height: 130px;
   background-color: ${colorSchema.background};
@@ -30,7 +32,7 @@ export const SearchContainer = styled.View`
   margin-top: 15px;
   height: 40px;
   background-color: ${colorSchema.backgroundLight};
-  width: ${Dimensions.get('window').width - 140}px;
+  width: ${width}px;
   border-radius: 25px;
   flex-direction: row;
   align-items: center;
@@ -42,5 +44,5 @@ export const IconContainer = styled.View`
 
 export const Text = styled.TextInput`
   margin-left: 10px;
-  width: ${Dimensions.get('window').width - 140}px;
+  width: ${width}px;
 `;

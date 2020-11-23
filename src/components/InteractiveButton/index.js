@@ -12,11 +12,14 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { getLastItem } from '~/services';
+import { getLastItemTitle } from '~/services';
 
 import { colorSchema } from '~/utils';
 
 import { MaterialIcons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { getLastItemDate } from '../../services';
+
+import moment from 'moment';
 
 const InteractiveButton = (props) => {
   const {
@@ -31,7 +34,8 @@ const InteractiveButton = (props) => {
   const [historyItem, setHistoryItem] = useState(standardText);
   const [statsItem, setStatsItem] = useState(standardText);
 
-  getLastItem(setShopItem);
+  getLastItemTitle(setShopItem);
+  getLastItemDate(setHistoryItem);
 
   const Icon = () => {
     if (delaySelectedCard == 'store') {
@@ -61,9 +65,21 @@ const InteractiveButton = (props) => {
     if (delaySelectedCard == 'store') {
       return shopItem;
     } else if (delaySelectedCard == 'history') {
-      return historyItem;
+      return moment(historyItem).format('D') + ' de ' + moment(historyItem).format('MMMM');
     } else if (delaySelectedCard == 'stats') {
       return statsItem;
+    }
+  }
+
+  const textButton = {
+    none() {
+      return 'Escolha uma opção!';
+    },
+    store() {
+      return 'Adicionar';
+    },
+    history() {
+      return 'Pesquisar';
     }
   }
 
@@ -71,7 +87,9 @@ const InteractiveButton = (props) => {
     <Container>
       <BoxContainer>
         <Icon />
-        <BoxText>
+        <BoxText
+          style={{ fontSize: delaySelectedCard == 'history' ? 15 : 16 }}
+        >
           {renderText()}
         </BoxText>
       </BoxContainer>
@@ -86,7 +104,7 @@ const InteractiveButton = (props) => {
           style={[ActionButtonStyle, { width }]}
         >
           <ActionButtonText>
-            {selectedCard == 'none' ? 'Escolha uma opção!' : 'Adicionar'}
+            {textButton[selectedCard] ? textButton[selectedCard]() : 'Adicionar'}
           </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
