@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
 
 const errorMsg = (error) => console.log('[Services] Error: ' + error);
@@ -34,4 +36,29 @@ export const getAllItems = (setData, setLoading) => {
     .then((data) => setData(data))
     .catch((error) => errorMsg(error))
     .finally(() => setLoading(true))
+}
+
+export const sendNewData = (title, value, date, setFetchData, closeAnimation) => {
+  const url = baseUrl + '/';
+
+  setFetchData(true);
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "title": title,
+      "value": value,
+      "date": date
+    })
+  })
+    .catch((error) => {
+      errorMsg(error);
+      setFetchData('error');
+    })
+    .finally(() => {
+      closeAnimation();
+    });
 }

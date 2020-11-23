@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import {
   TouchableWithoutFeedback,
-  Animated
+  Animated,
+  ActivityIndicator
 } from 'react-native';
 
 import {
@@ -13,11 +14,12 @@ import {
 } from './styles';
 
 import { colorSchema, springAnimation } from '~/utils';
+import { sendNewData } from '~/services';
 
 import Date from './Date';
 import Parameters from './Parameters';
 
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import { Modalize } from 'react-native-modalize';
 import moment from 'moment';
@@ -27,21 +29,23 @@ moment.locale('pt-br');
 
 const Store = (props) => {
   const { reference } = props;
-  const [hourValue, setHourValue] = useState(moment().format('HH'));
-  const [minValue, setMinValue] = useState(moment().format('m'));
-  const [dayValue, setDayValue] = useState(moment().format('Do'));
-  const [monthValue, setMonthValue] = useState(moment().format('MMMM'));
+  const [date, setDate] = useState(moment());
+  const [title, setTitle] = useState();
+  const [value, setValue] = useState();
 
   const [width, setWidth] = useState(new Animated.Value(150));
   const [scale, setScale] = useState(new Animated.Value(1));
 
   const [textChange, setTextChange] = useState(false);
+  const [fetchData, setFetchData] = useState(false);
+  const [emptyParam, setEmptyParam] = useState({ title: true, value: true });
 
   const closeAnimation = () => {
     springAnimation(width, 80).start();
     springAnimation(scale, 0).start(() => {
       springAnimation(scale, 1).start();
       setTextChange(true);
+      setFetchData(false);
     });
   }
 
@@ -51,6 +55,59 @@ const Store = (props) => {
       springAnimation(scale, 1).start();
       setTextChange(false);
     });
+  }
+
+  const renderContentButton = () => {
+    if (!fetchData) {
+      if (!textChange) {
+        return <AddButtonText>Adicionar</AddButtonText>
+      } else {
+        return <AntDesign
+          name="check"
+          size={24}
+          color={colorSchema.background}
+        />
+      }
+    } else if (fetchData === 'error') {
+      return <MaterialIcons
+        name="error-outline"
+        size={24}
+        color={colorSchema.background}
+      />
+    } else {
+      return <ActivityIndicator
+        size='small'
+        color={colorSchema.background} />
+    }
+  }
+
+  const checkParam = (param) => {
+    let paramBool;
+
+    if (typeof param == 'string') {
+      if (param.length <= 0) {
+        paramBool = true;
+      } else if (param == undefined) {
+        paramBool = true;
+      }
+    }
+
+    return paramBool;
+  }
+
+  const sendData = () => {
+
+    setEmptyParam({
+      title: title,
+      value: value,
+    });
+
+    if (title && value) {
+      let formattedTitle = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+      let formattedValue = value.replace('.', '').replace(',', '.');
+
+      sendNewData(formattedTitle, formattedValue, date, setFetchData, closeAnimation);
+    }
   }
 
   return (
@@ -64,22 +121,16 @@ const Store = (props) => {
       }}
     >
       <FormContainer>
-        <Date
-          hourValue={hourValue}
-          setHourValue={setHourValue}
-          minValue={minValue}
-          setMinValue={setMinValue}
-          dayValue={dayValue}
-          setDayValue={setDayValue}
-          monthValue={monthValue}
-          setMonthValue={setMonthValue}
+        <Date />
+        <Parameters
+          setTitle={setTitle}
+          setValue={setValue}
+          emptyParam={emptyParam}
+          setEmptyParam={setEmptyParam}
         />
-        <Parameters />
         <AddButtonContainer>
           <TouchableWithoutFeedback
-            onPress={() => {
-              textChange ? openAnimation() : closeAnimation();
-            }}
+            onPress={() => !textChange ? sendData() : closeAnimation()}
           >
             <Animated.View
               style={[AddButtonBox, { width }]}
@@ -93,15 +144,7 @@ const Store = (props) => {
                   }]
                 }}
               >
-                {!textChange ? <AddButtonText>
-                  Adicionar
-                    </AddButtonText> :
-                  <AntDesign
-                    name="check"
-                    size={24}
-                    color={colorSchema.background}
-                  />
-                }
+                {renderContentButton()}
               </Animated.View>
             </Animated.View>
           </TouchableWithoutFeedback>

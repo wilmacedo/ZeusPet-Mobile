@@ -7,7 +7,8 @@ export const colorSchema = {
   fontLight: '#a7a7a7',
   backgroundLight: '#f2f2f2',
   historyBackground: '#f6f7fb',
-  money: '#00cc00'
+  money: '#00cc00',
+  error: '#b30000'
 };
 
 export const springAnimation = (animatedValue, toValue) => {
