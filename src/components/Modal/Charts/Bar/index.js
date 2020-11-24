@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { ChartBar } from './styles';
+import { Animated } from 'react-native';
+
+import {
+  BarContainer,
+  BarDescription,
+  BarModel
+} from './styles';
+
+import { springAnimation } from '~/utils';
 
 const Bar = (props) => {
   const {
-    style
+    height,
+    marginLeft,
+    name
   } = props;
-  return <ChartBar 
-    style={style}
-  />;
+
+  const [animatedHeight, setAnimatedHeight] = useState(new Animated.Value(0));
+
+  springAnimation(animatedHeight, height).start();
+
+  return (
+    <BarContainer style={{ marginLeft }}>
+      <Animated.View style={[BarModel, { height: animatedHeight }]} />
+      <BarDescription>{name}</BarDescription>
+    </BarContainer>
+  );
 }
 
 export default Bar;

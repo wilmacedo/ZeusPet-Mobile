@@ -11,10 +11,11 @@ export const colorSchema = {
   error: '#b30000'
 };
 
-export const springAnimation = (animatedValue, toValue) => {
+export const springAnimation = (animatedValue, toValue, delay) => {
   return Animated.spring(animatedValue, {
     toValue,
-    useNativeDriver: false
+    useNativeDriver: false,
+    delay: delay || 0
   });
 }
 

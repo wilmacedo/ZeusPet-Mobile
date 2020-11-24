@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { ActivityIndicator, Platform } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 import { LoadingView, modalStyle } from './styles';
 
@@ -16,11 +16,9 @@ const History = (props) => {
   const [searchData, setSearchData] = useState();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!loading) {
-      getAllItems(setData, setLoading);
-    }
-  });
+  if (!loading) {
+    getAllItems(setData, setLoading);
+  }
 
   const renderItem = ({ item }) => {
     const {

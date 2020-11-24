@@ -24,7 +24,6 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { Modalize } from 'react-native-modalize';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-
 moment.locale('pt-br');
 
 const Store = (props) => {
