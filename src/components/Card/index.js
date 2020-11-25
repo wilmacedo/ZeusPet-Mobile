@@ -34,7 +34,7 @@ const Card = (props) => {
   const Icon = () => {
     if (iconType == 'stats') {
       return <Ionicons name='md-stats' size={28} color={iconColor} />;
-    } else if (iconType== 'store') {
+    } else if (iconType == 'store') {
       return <MaterialCommunityIcons name="shopping" size={28} color={iconColor} />;
     } else if (iconType == 'history') {
       return <MaterialCommunityIcons name={iconType} size={28} color={iconColor} />;
@@ -42,17 +42,9 @@ const Card = (props) => {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        props.onPress();
-      }}
-    >
+    <TouchableWithoutFeedback onPress={() => props.onPress()}>
       <CardContainer
-        style={{
-          borderColor,
-          backgroundColor,
-          marginRight: margin
-        }}
+        style={{ borderColor, backgroundColor, marginRight: margin }}
       >
         <Icon />
       </CardContainer>

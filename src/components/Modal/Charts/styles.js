@@ -10,18 +10,10 @@ export const LoadingView = styled.View`
   margin-top: 120px;
 `;
 
-export const Container = styled.View`
-  height: 500px;
-  background-color: ${colorSchema.historyBackground};
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-`;
-
 export const ChartContainer = styled.View`
-  height: ${400 * 0.8}px;
   padding: 30px;
   background-color: ${colorSchema.background};
-  border-radius: 30px;
+  border-radius: 25px;
 `;
 
 export const TitleThin = styled.Text`
@@ -64,3 +56,20 @@ export const ChartText = styled.Text`
   width: 25px;
   font-size: 12px;
 `;
+
+export const modalStyle = {
+  zIndex: 5,
+
+  marginTop: 'auto',
+
+  backgroundColor: colorSchema.historyBackground,
+  borderTopLeftRadius: 12,
+  borderTopRightRadius: 12,
+
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 10 },
+  shadowOpacity: 0.1,
+  shadowRadius: 12,
+
+  elevation: 4,
+};

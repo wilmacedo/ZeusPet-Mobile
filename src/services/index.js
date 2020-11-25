@@ -26,6 +26,18 @@ export const getLastItemDate = (setValue) => {
     .catch((error) => errorMsg(error));
 }
 
+export const getLastItem = (setValue, setLoading) => {
+  const url = baseUrl + '/items/last';
+
+  fetch(url, {
+    method: 'GET'
+  })
+    .then((response) => response.json())
+    .then((data) => setValue(data))
+    .catch((error) => errorMsg(error))
+    .finally(() => setLoading(true));
+}
+
 export const getAllItems = (setData, setLoading) => {
   const url = baseUrl + '/';
 

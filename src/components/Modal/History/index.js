@@ -16,9 +16,7 @@ const History = (props) => {
   const [searchData, setSearchData] = useState();
   const [loading, setLoading] = useState(false);
 
-  if (!loading) {
-    getAllItems(setData, setLoading);
-  }
+  if (!loading) getAllItems(setData, setLoading);
 
   const renderItem = ({ item }) => {
     const {

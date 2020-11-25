@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { Animated } from 'react-native';
-
-import { TouchableWithoutFeedback } from 'react-native';
+import {
+  Animated,
+  TouchableWithoutFeedback,
+  ActivityIndicator
+} from 'react-native';
 
 import {
   Container,
@@ -12,14 +14,18 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { getLastItemTitle } from '~/services';
-
 import { colorSchema } from '~/utils';
+import { getLastItem, getAllItems } from '~/services';
+import { filterData } from '~/components/Modal/Charts/filter-data';
 
-import { MaterialIcons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { getLastItemDate } from '../../services';
+import {
+  MaterialIcons,
+  Feather,
+  MaterialCommunityIcons
+} from '@expo/vector-icons';
 
 import moment from 'moment';
+import { getMaxValue } from '../Modal/Charts/filter-data';
 
 const InteractiveButton = (props) => {
   const {
@@ -30,63 +36,97 @@ const InteractiveButton = (props) => {
   } = props;
 
   let standardText = 'Nada por aqui';
-  const [shopItem, setShopItem] = useState(standardText);
-  const [historyItem, setHistoryItem] = useState(standardText);
-  const [statsItem, setStatsItem] = useState(standardText);
+  const [lastData, setLastData] = useState();
+  const [data, setData] = useState();
+  const [lastDataLoading, setLastDataLoading] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
 
-  getLastItemTitle(setShopItem);
-  getLastItemDate(setHistoryItem);
+  if (!lastDataLoading) getLastItem(setLastData, setLastDataLoading);
+  if (!dataLoading) getAllItems(setData, setDataLoading);
 
-  const Icon = () => {
-    if (delaySelectedCard == 'store') {
-      return <MaterialIcons
+  const items = {
+    none() {
+      let none = {};
+      none.name = 'none';
+      none.textButton = 'Escolha uma opção!';
+      none.text = () => 'Nada por aqui';
+
+      return none;
+    },
+    store() {
+      let store = {};
+      store.name = 'store';
+      store.textButton = 'Adicionar';
+      store.icon = <MaterialIcons
         name='pets'
         size={24}
         color={colorSchema.black}
-      />
-    } else if (delaySelectedCard == 'history') {
-      return <Feather
+      />;
+      store.text = () => lastDataLoading && lastData ? lastData[0].title : standardText;
+
+      return store;
+    },
+    history() {
+      let history = {};
+      history.name = 'history';
+      history.textButton = 'Pesquisar';
+      history.icon = <Feather
         name='calendar'
         size={24}
         color={colorSchema.black}
-      />
-    } else if (delaySelectedCard == 'stats') {
-      return <MaterialCommunityIcons
+      />;
+      history.text = () => {
+        if (lastDataLoading && lastData) {
+          let date = lastData[0].date;
+          return moment(date).format('D') + ' de ' + moment(date).format('MMMM');
+        }
+
+        return standardText;
+      }
+
+      return history;
+    },
+    stats() {
+      let stats = {};
+      stats.textButton = 'Visualizar';
+      stats.name = 'stats';
+      stats.icon = <MaterialCommunityIcons
         name="chart-timeline-variant"
         size={24}
         color={colorSchema.black}
-      />
-    }
+      />;
+      stats.text = () => {
+        const filterList = filterData(data, dataLoading);
+        const maxValue = getMaxValue(data, dataLoading);
+        let formattedValue = 0;
 
-    return <></>;
+        if (dataLoading && filterList) {
+          formattedValue = maxValue.toFixed(2).replace('.', ',');
+
+          return maxValue == 0 ? standardText : 'R$' + formattedValue;
+        }
+
+        return standardText;
+      };
+
+      return stats;
+    }
   }
+
+  const renderIcon = () => items[delaySelectedCard]().icon;
 
   const renderText = () => {
-    if (delaySelectedCard == 'store') {
-      return shopItem;
-    } else if (delaySelectedCard == 'history') {
-      return moment(historyItem).format('D') + ' de ' + moment(historyItem).format('MMMM');
-    } else if (delaySelectedCard == 'stats') {
-      return statsItem;
-    }
-  }
-
-  const textButton = {
-    none() {
-      return 'Escolha uma opção!';
-    },
-    store() {
-      return 'Adicionar';
-    },
-    history() {
-      return 'Pesquisar';
+    if (!lastDataLoading && !dataLoading) {
+      return <ActivityIndicator size='small' color={colorSchema.black} />;
+    } else {
+      return items[delaySelectedCard]().text();
     }
   }
 
   return (
     <Container>
       <BoxContainer>
-        <Icon />
+        {renderIcon()}
         <BoxText
           style={{ fontSize: delaySelectedCard == 'history' ? 15 : 16 }}
         >
@@ -94,17 +134,13 @@ const InteractiveButton = (props) => {
         </BoxText>
       </BoxContainer>
       <TouchableWithoutFeedback
-        onPress={() => {
-          if (selectedCard != 'none') {
-            modalReference.current?.open();
-          }
-        }}
+        onPress={() => { if (selectedCard != 'none') modalReference.current?.open() }}
       >
         <Animated.View
           style={[ActionButtonStyle, { width }]}
         >
           <ActionButtonText>
-            {textButton[selectedCard] ? textButton[selectedCard]() : 'Adicionar'}
+            {items[selectedCard]().textButton}
           </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
