@@ -14,9 +14,9 @@ import {
   ActionButtonStyle
 } from './styles';
 
-import { colorSchema } from '~/utils';
+import { colorSchema, formatToMoney } from '~/utils';
 import { getLastItem, getAllItems } from '~/services';
-import { filterData } from '~/components/Modal/Charts/filter-data';
+import { filterData, getMaxValue } from '~/components/Modal/Charts/filter-data';
 
 import {
   MaterialIcons,
@@ -25,7 +25,6 @@ import {
 } from '@expo/vector-icons';
 
 import moment from 'moment';
-import { getMaxValue } from '../Modal/Charts/filter-data';
 
 const InteractiveButton = (props) => {
   const {
@@ -96,15 +95,9 @@ const InteractiveButton = (props) => {
         color={colorSchema.black}
       />;
       stats.text = () => {
-        const filterList = filterData(data, dataLoading);
         const maxValue = getMaxValue(data, dataLoading);
-        let formattedValue = 0;
 
-        if (dataLoading && filterList) {
-          formattedValue = maxValue.toFixed(2).replace('.', ',');
-
-          return maxValue == 0 ? standardText : 'R$' + formattedValue;
-        }
+        if (dataLoading && data) return maxValue == 0 ? standardText : 'R$' + formatToMoney(maxValue);
 
         return standardText;
       };

@@ -73,3 +73,9 @@ export const modalStyle = {
 
   elevation: 4,
 };
+
+export const CardContainer = styled.View`
+  margin-top: 30px;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;

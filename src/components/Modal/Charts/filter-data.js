@@ -33,6 +33,33 @@ export const getMaxValue = (data, loading) => {
   return maxValue;
 }
 
+export const getDayMaxValue = (data, loading) => {
+  const filterList = filterData(data, loading);
+  const days = [
+    'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'
+  ];
+  let tempList = [];
+
+  if (loading && filterList) {
+    for (const item in filterList) {
+      let day = moment(filterList[item].date).format('ddd').toLowerCase();
+      let value = filterList[item].value;
+
+      tempList = [...tempList, { day, value }];
+    }
+
+    let test = tempList.reduce((acc, date) => acc = acc > date.value ? acc : date.day, 0);
+
+    for (const day in days) {
+      if (test == days[day].substring(0, 3).toLowerCase()) {
+        return days[day];
+      }
+    }
+    
+    return '?';
+  }
+}
+
 export const getHeight = (name, data, loading) => {
   const filterList = filterData(data, loading);
   const maxValue = getMaxValue(data, loading);

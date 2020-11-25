@@ -8,8 +8,9 @@ import {
   Value
 } from './styles';
 
+import { colorSchema, formatToMoney } from '~/utils';
+
 import { AntDesign } from '@expo/vector-icons';
-import { colorSchema } from '~/utils';
 
 import moment from 'moment';
 
@@ -20,14 +21,6 @@ const Item = (props) => {
     date,
     value
   } = props;
-
-  const renderValue = () => {
-    let formattedValue = value.toFixed(2).replace('.', ',');
-    if (value >= 1000 && value < 10000) {
-      formattedValue = formattedValue.charAt(0) + '.' + formattedValue.slice(1);
-    }
-    return formattedValue;
-  }
 
   return (
     <Container key={id}>
@@ -40,7 +33,7 @@ const Item = (props) => {
         />
         <Date>{moment(date).format('HH:mm')} - {moment(date).format('D')} de {moment(date).format('MMMM')}</Date>
       </DateContainer>
-      <Value>R${!value ? '?' : renderValue()}</Value>
+      <Value>R${!value ? '?' : formatToMoney(value)}</Value>
     </Container>
   );
 }
