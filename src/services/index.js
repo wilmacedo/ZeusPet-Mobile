@@ -38,14 +38,14 @@ export const getLastItem = (setValue, setLoading) => {
     .finally(() => setLoading(true));
 }
 
-export const getAllItems = (setData, setLoading) => {
+export const getAllItems = (setData, setLoading, reverse) => {
   const url = baseUrl + '/';
 
   fetch(url, {
     method: 'GET'
   })
     .then((response) => response.json())
-    .then((data) => setData(data))
+    .then((data) => setData(reverse ? data.reverse() : data))
     .catch((error) => errorMsg(error))
     .finally(() => setLoading(true));
 }

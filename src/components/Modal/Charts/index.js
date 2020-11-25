@@ -49,13 +49,21 @@ const Charts = (props) => {
   const cardItems = [
     {
       value: () => formatToMoney(getMaxValue(data, loading)),
-      icon: () => <FontAwesome5 name="money-bill-alt" size={12} color={'rgba(0, 0, 0, 0.8)'} />,
+      icon: () => <FontAwesome5
+        name="money-bill-alt"
+        size={12}
+        color={'rgba(0, 0, 0, 0.8)'}
+      />,
       description: 'Total semanal',
       sub: 'R$ '
     },
     {
       value: () => getDayMaxValue(data, loading),
-      icon: () => <FontAwesome name="calendar-o" size={12} color={'rgba(0, 0, 0, 0.8)'} />,
+      icon: () => <FontAwesome
+        name="calendar-o"
+        size={12}
+        color={'rgba(0, 0, 0, 0.8)'}
+      />,
       description: 'Dia de maior valor'
     }
   ];

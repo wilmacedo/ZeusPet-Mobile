@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Animated,
@@ -16,7 +16,7 @@ import {
 
 import { colorSchema, formatToMoney } from '~/utils';
 import { getLastItem, getAllItems } from '~/services';
-import { filterData, getMaxValue } from '~/components/Modal/Charts/filter-data';
+import { getMaxValue } from '~/components/Modal/Charts/filter-data';
 
 import {
   MaterialIcons,
@@ -24,7 +24,7 @@ import {
   MaterialCommunityIcons
 } from '@expo/vector-icons';
 
-import moment from 'moment';
+import moment, { max } from 'moment';
 
 const InteractiveButton = (props) => {
   const {
@@ -40,8 +40,34 @@ const InteractiveButton = (props) => {
   const [lastDataLoading, setLastDataLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
 
-  if (!lastDataLoading) getLastItem(setLastData, setLastDataLoading);
-  if (!dataLoading) getAllItems(setData, setDataLoading);
+  const [storeText, setStoreText] = useState();
+  const [historyText, setHistoryText] = useState();
+  const [statsText, setStatsText] = useState();
+
+  // if (!lastDataLoading) getLastItem(setLastData, setLastDataLoading);
+  // if (!dataLoading) getAllItems(setData, setDataLoading);
+
+  useEffect(() => {
+    if (delaySelectedCard == 'store') {
+      getLastItem(setLastData, setLastDataLoading);
+      setStoreText(lastDataLoading && lastData ? lastData[0].title : standardText);
+    } else if (delaySelectedCard == 'history') {
+      getLastItem(setLastData, setLastDataLoading);
+      if (lastDataLoading && lastData) {
+        let date = lastData[0].date;
+        setHistoryText(moment(date).format('D') + ' de ' + moment(date).format('MMMM'));
+      }
+    } else if (delaySelectedCard == 'stats') {
+      getAllItems(setData, setDataLoading);
+      const maxValue = getMaxValue(data, dataLoading);
+
+      if (dataLoading && data && maxValue > 0) {
+        setStatsText('R$' + formatToMoney(maxValue));
+      } else {
+        setStatsText(standardText);
+      }
+    }
+  });
 
   const items = {
     none() {
@@ -56,12 +82,12 @@ const InteractiveButton = (props) => {
       let store = {};
       store.name = 'store';
       store.textButton = 'Adicionar';
+      store.text = storeText;
       store.icon = <MaterialIcons
         name='pets'
         size={24}
         color={colorSchema.black}
       />;
-      store.text = () => lastDataLoading && lastData ? lastData[0].title : standardText;
 
       return store;
     },
@@ -69,19 +95,12 @@ const InteractiveButton = (props) => {
       let history = {};
       history.name = 'history';
       history.textButton = 'Pesquisar';
+      history.text = historyText;
       history.icon = <Feather
         name='calendar'
         size={24}
         color={colorSchema.black}
       />;
-      history.text = () => {
-        if (lastDataLoading && lastData) {
-          let date = lastData[0].date;
-          return moment(date).format('D') + ' de ' + moment(date).format('MMMM');
-        }
-
-        return standardText;
-      }
 
       return history;
     },
@@ -89,18 +108,12 @@ const InteractiveButton = (props) => {
       let stats = {};
       stats.textButton = 'Visualizar';
       stats.name = 'stats';
+      stats.text = statsText;
       stats.icon = <MaterialCommunityIcons
         name="chart-timeline-variant"
         size={24}
         color={colorSchema.black}
       />;
-      stats.text = () => {
-        const maxValue = getMaxValue(data, dataLoading);
-
-        if (dataLoading && data) return maxValue == 0 ? standardText : 'R$' + formatToMoney(maxValue);
-
-        return standardText;
-      };
 
       return stats;
     }
@@ -112,7 +125,10 @@ const InteractiveButton = (props) => {
     if (!lastDataLoading && !dataLoading) {
       return <ActivityIndicator size='small' color={colorSchema.black} />;
     } else {
-      return items[delaySelectedCard]().text();
+      if (delaySelectedCard == 'history') return historyText;
+      else if (delaySelectedCard == 'store') return storeText;
+      else if (delaySelectedCard == 'stats') return statsText;
+      else return standardText;
     }
   }
 
@@ -137,7 +153,7 @@ const InteractiveButton = (props) => {
           </ActionButtonText>
         </Animated.View>
       </TouchableWithoutFeedback>
-    </Container>
+    </Container >
   );
 }
 

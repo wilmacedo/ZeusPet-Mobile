@@ -12,11 +12,11 @@ import { Modalize } from 'react-native-modalize';
 
 const History = (props) => {
   const { reference } = props;
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [searchData, setSearchData] = useState();
   const [loading, setLoading] = useState(false);
 
-  if (!loading) getAllItems(setData, setLoading);
+  if (!loading) getAllItems(setData, setLoading, true);
 
   const renderItem = ({ item }) => {
     const {
@@ -27,6 +27,7 @@ const History = (props) => {
 
     return (
       <Item
+        key={title}
         title={title}
         date={date}
         value={value}
