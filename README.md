@@ -19,3 +19,21 @@ Desafio proposto por BlueLab para ser utilizado como treinamento de diversas fer
 - React Native
 - Expo
 - MongoDB
+
+## Preview das funções
+
+- Rota principal
+
+<img src="https://github.com/wilmacedo/ZeusPet-Mobile/blob/master/preview/main.PNG" alt="Main" style="max-width:100%;" width="400px">
+
+- Registro de gastos
+
+<img src="https://github.com/wilmacedo/ZeusPet-Mobile/blob/master/preview/store.PNG" alt="Store" style="max-width:100%;" width="400px">
+
+- Histórico de gastos
+
+<img src="https://github.com/wilmacedo/ZeusPet-Mobile/blob/master/preview/history.PNG" alt="History" style="max-width:100%;" width="400px">
+
+- Estatística de gastos
+
+<img src="https://github.com/wilmacedo/ZeusPet-Mobile/blob/master/preview/stats.PNG" alt="Stats" style="max-width:100%;" width="400px">
