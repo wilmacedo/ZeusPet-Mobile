@@ -7,17 +7,27 @@ import Charts from './Charts';
 import { Modalize } from 'react-native-modalize';
 
 const Modal = (props) => {
-  const { 
+  const {
     reference,
-    selectedCard
+    selectedCard,
+    data,
+    dataLoading
   } = props;
 
   if (selectedCard == 'history') {
-    return <History reference={reference} />;
+    return <History
+      reference={reference}
+      data={data}
+      dataLoading={dataLoading}
+    />;
   } else if (selectedCard == 'store') {
     return <Store reference={reference} />;
   } else if (selectedCard == 'stats') {
-    return <Charts reference={reference} />;
+    return <Charts
+      reference={reference}
+      data={data}
+      dataLoading={dataLoading}
+    />;
   } else {
     return <Modalize ref={reference} modalHeight={400} />;
   }

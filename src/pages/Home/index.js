@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   StatusBar,
   Image,
-  Animated
+  Animated,
+  FlatList
 } from 'react-native';
 
 import {
@@ -20,9 +21,17 @@ import InteractiveButton from '~/components/InteractiveButton';
 import Modal from '~/components/Modal';
 
 import { colorSchema, springAnimation } from '~/utils';
+import { getAllItems } from '~/services';
+import { getLastItem } from '../../services';
 
 const Home = () => {
   let standardWidth = 280;
+
+  const [data, setData] = useState();
+  const [dataLoading, setDataLoading] = useState(false);
+  const [lastData, setLastData] = useState();
+  const [lastLoading, setLastLoading] = useState(false);
+
   const allCards = ['store', 'history', 'stats'];
   const [selectedCard, setSelectedCard] = useState('none');
   const [delaySelectedCard, setDelaySelectedCard] = useState('none');
@@ -43,6 +52,14 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    getAllItems(setData, setDataLoading, false);
+  }, [data]);
+
+  useEffect(() => {
+    getLastItem(setLastData, setLastLoading, false);
+  }, [lastData]);
+
   return (
     <>
       <StatusBar
@@ -53,6 +70,8 @@ const Home = () => {
         <Modal
           reference={modalReference}
           selectedCard={selectedCard}
+          data={data}
+          dataLoading={dataLoading}
         />
         <SafeArea>
           <Container>
@@ -83,6 +102,10 @@ const Home = () => {
               delaySelectedCard={delaySelectedCard}
               width={width}
               modalReference={modalReference}
+              lastData={lastData}
+              data={data}
+              lastLoading={lastLoading}
+              dataLoading={dataLoading}
             />
           </Container>
         </SafeArea>

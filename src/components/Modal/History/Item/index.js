@@ -23,7 +23,7 @@ const Item = (props) => {
   } = props;
 
   return (
-    <Container>
+    <Container key={id}>
       <Title>{!title ? 'Desconhecido' : title}</Title>
       <DateContainer>
         <AntDesign

@@ -17,7 +17,6 @@ import Bar from './Bar';
 import Card from './Card';
 import { getMaxValue, getHeight, getDayMaxValue } from './filter-data';
 
-import { getAllItems } from '~/services';
 import { formatToMoney } from '~/utils';
 
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
@@ -27,19 +26,18 @@ import 'moment/locale/pt-br';
 moment.locale('pt-br');
 
 const Charts = (props) => {
-  const { reference } = props;
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
-
+  const {
+    reference,
+    data,
+    dataLoading
+  } = props;
   const days = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-
-  if (!loading) getAllItems(setData, setLoading);
 
   const renderBar = () => {
     return days.map((name, index) => {
       return <Bar
         key={index}
-        height={getHeight(name, data, loading)}
+        height={getHeight(name, data, dataLoading)}
         marginLeft={index > 0 ? 10 : 0}
         name={name}
       />
@@ -48,7 +46,7 @@ const Charts = (props) => {
 
   const cardItems = [
     {
-      value: () => formatToMoney(getMaxValue(data, loading)),
+      value: () => formatToMoney(getMaxValue(data, dataLoading)),
       icon: () => <FontAwesome5
         name="money-bill-alt"
         size={12}
@@ -58,7 +56,7 @@ const Charts = (props) => {
       sub: 'R$ '
     },
     {
-      value: () => getDayMaxValue(data, loading),
+      value: () => getDayMaxValue(data, dataLoading),
       icon: () => <FontAwesome
         name="calendar-o"
         size={12}
@@ -68,7 +66,7 @@ const Charts = (props) => {
     }
   ];
 
-  return !loading ?
+  return !dataLoading ?
     <Modalize
       ref={reference}
       modalHeight={480}

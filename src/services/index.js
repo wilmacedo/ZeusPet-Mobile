@@ -4,28 +4,6 @@ const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
 
 const errorMsg = (error) => console.log('[Services] Error: ' + error);
 
-export const getLastItemTitle = (setValue) => {
-  const url = baseUrl + '/items/last';
-
-  fetch(url, {
-    method: 'GET'
-  })
-    .then((response) => response.json())
-    .then((data) => setValue(data[0].title))
-    .catch((error) => errorMsg(error));
-}
-
-export const getLastItemDate = (setValue) => {
-  const url = baseUrl + '/items/last';
-
-  fetch(url, {
-    method: 'GET'
-  })
-    .then((response) => response.json())
-    .then((data) => setValue(data[0].date))
-    .catch((error) => errorMsg(error));
-}
-
 export const getLastItem = (setValue, setLoading) => {
   const url = baseUrl + '/items/last';
 
@@ -97,4 +75,14 @@ export const sendNewData = (title, value, date, setFetchData, closeAnimation) =>
     .finally(() => {
       closeAnimation();
     });
+}
+
+export const isEmpty = (object) => {
+  for (const item in object) {
+    if (object.hasOwnProperty(item)) {
+      return false;
+    }
+  }
+  
+  return true;
 }

@@ -1,41 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ActivityIndicator } from 'react-native';
 
 import { LoadingView, modalStyle } from './styles';
 
+import { isEmpty } from '~/services';
+
 import Item from './Item';
 import Search from './Search';
 
-import { getAllItems } from '~/services';
 import { Modalize } from 'react-native-modalize';
+import moment from 'moment';
 
 const History = (props) => {
-  const { reference } = props;
-  const [data, setData] = useState();
+  const {
+    reference,
+    data,
+    dataLoading
+  } = props;
   const [searchData, setSearchData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [revData, setRevData] = useState();
 
-  if (!loading) getAllItems(setData, setLoading, true);
+  useEffect(() => {
+    setRevData(data.reverse());
+  }, [data]);
 
-  const renderItem = ({ item }) => {
-    const {
-      title,
-      date,
-      value
-    } = item;
+  const emptyData = [{
+    title: 'Nada por aqui',
+    value: 0,
+    date: moment()
+  }];
 
-    return (
-      <Item
-        key={title}
-        title={title}
-        date={date}
-        value={value}
-      />
-    );
+  const renderLoader = () => {
+    <LoadingView>
+      <ActivityIndicator size="large" color="black" />
+    </LoadingView>
   }
 
-  return !loading ?
+  return !dataLoading ?
     <Modalize
       ref={reference}
       snapPoint={450}
@@ -45,9 +47,7 @@ const History = (props) => {
         scrollEnabled: false
       }}
     >
-      <LoadingView>
-        <ActivityIndicator size="large" color="black" />
-      </LoadingView>
+      {renderLoader()}
     </Modalize>
     :
     <Modalize
@@ -57,16 +57,23 @@ const History = (props) => {
       HeaderComponent={
         <Search
           data={data}
-          setData={setData}
           searchData={searchData}
           setSearchData={setSearchData}
         />
       }
       modalStyle={modalStyle}
       flatListProps={{
-        data: searchData || data,
-        renderItem: renderItem,
-        keyExtractor: item => item.id,
+        data: !isEmpty(data) ? searchData || revData : emptyData,
+        renderItem: ({ item }) => {
+          return (
+            <Item
+              title={item.title}
+              date={item.date}
+              value={item.value}
+            />
+          );
+        },
+        keyExtractor: item => item._id,
         contentContainerStyle: { alignItems: 'center' },
         showsVerticalScrollIndicator: false
       }}
