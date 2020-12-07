@@ -11,6 +11,11 @@ export const colorSchema = {
   error: '#b30000'
 };
 
+const credentials = {
+  username: 'Will',
+  password: 'teste'
+}
+
 export const springAnimation = (animatedValue, toValue, delay) => {
   return Animated.spring(animatedValue, {
     toValue,
@@ -32,8 +37,12 @@ export const formatToMoney = (number) => {
   var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(maxDecimal)));
   var j = (j = i.length) > 3 ? j % 3 : 0;
 
-  return sign + 
+  return sign +
     (j ? i.substr(0, j) + thoSeperator : '') +
     i.substr(j).replace(/(\decSeparator{3})(?=\decSeparator)/g, "$1" + thoSeperator) +
     (maxDecimal ? decSeparator + Math.abs(number - i).toFixed(maxDecimal).slice(2) : '');
+}
+
+export const auth = (username, password) => {
+  return (username === credentials.username && password === credentials.password);
 }

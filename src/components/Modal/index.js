@@ -10,23 +10,29 @@ const Modal = (props) => {
   const {
     reference,
     selectedCard,
+    fullData,
+    petName,
     data,
-    dataLoading
+    loading
   } = props;
 
   if (selectedCard == 'history') {
     return <History
       reference={reference}
       data={data}
-      dataLoading={dataLoading}
+      loading={loading}
     />;
   } else if (selectedCard == 'store') {
-    return <Store reference={reference} />;
+    return <Store
+      reference={reference}
+      fullData={fullData}
+      petName={petName}
+    />;
   } else if (selectedCard == 'stats') {
     return <Charts
       reference={reference}
       data={data}
-      dataLoading={dataLoading}
+      loading={loading}
     />;
   } else {
     return <Modalize ref={reference} modalHeight={400} />;

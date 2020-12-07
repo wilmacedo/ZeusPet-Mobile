@@ -1,72 +1,63 @@
-import moment from 'moment';
+import { auth } from '~/utils';
 
 const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
 
-const errorMsg = (error) => console.log('[Services] Error: ' + error);
+const errorMsg = (error) => console.log('[Services] ' + error);
 
-export const getLastItem = (setValue, setLoading) => {
-  const url = baseUrl + '/items/last';
-
-  fetch(url, {
-    method: 'GET'
-  })
-    .then((response) => response.json())
-    .then((data) => setValue(data))
-    .catch((error) => errorMsg(error))
-    .finally(() => setLoading(true));
+export const getLastItem = (setLastItem, data) => {
+  if (data) {
+    let size = Object.keys(data).length;
+    for (const item in data) {
+      if (parseInt(item) === size - 1) {
+        setLastItem(data[item]);
+      }
+    }
+  }
 }
 
-export const getAllItems = (setData, setLoading, reverse) => {
+export const getAllItems = (setData, setLoading) => {
   const url = baseUrl + '/';
 
   fetch(url, {
     method: 'GET'
   })
     .then((response) => response.json())
-    .then((data) => setData(reverse ? data.reverse() : data))
+    .then((data) => setData(data))
     .catch((error) => errorMsg(error))
     .finally(() => setLoading(true));
 }
 
-export const getLastWeekData = (setData, setLoading) => {
-  const url = baseUrl + '/';
-  let tempData, finalData = [];
+export const sendNewData = (
+  fullData, petName, newData, setFetchData, closeAnimation
+) => {
+  let url = '';
 
-  fetch(url, {
-    method: 'GET'
-  })
-    .then((response) => response.json())
-    .then((data) => tempData = data)
-    .catch((error) => errorMsg(error))
-    .finally(() => {
-      for (const item in tempData) {
-        let dbDay = moment(tempData[item].date).format('DD');
-        let nowDay = moment().format('DD');
+  for (const item in fullData) {
+    let username = fullData[item].username;
+    let password = fullData[item].password;
 
-        if (dbDay >= nowDay - 7) {
-          finalData = [...finalData, tempData[item]];
+    if (auth(username, password)) {
+      url = baseUrl + fullData[item]._id + '/';
+
+      for (const pet in fullData[item].pets) {
+        if (petName === fullData[item].pets[pet].name) {
+          url += fullData[item].pets[pet]._id;
         }
       }
-      setData(finalData);
-      setLoading(true);
-    });
-}
-
-export const sendNewData = (title, value, date, setFetchData, closeAnimation) => {
-  const url = baseUrl + '/';
+    } else {
+      // Auth error
+    }
+  }
 
   setFetchData(true);
 
   fetch(url, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      "title": title,
-      "value": value,
-      "date": date
-    })
+    body: JSON.stringify(newData)
   })
     .catch((error) => {
       errorMsg(error);
@@ -83,6 +74,6 @@ export const isEmpty = (object) => {
       return false;
     }
   }
-  
+
   return true;
 }

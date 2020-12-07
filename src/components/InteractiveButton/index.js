@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 import { colorSchema, formatToMoney } from '~/utils';
-import { getLastItem, getAllItems, isEmpty } from '~/services';
+import { isEmpty } from '~/services';
 import { getMaxValue } from '~/components/Modal/Charts/filter-data';
 
 import {
@@ -24,7 +24,8 @@ import {
   MaterialCommunityIcons
 } from '@expo/vector-icons';
 
-import moment, { max } from 'moment';
+import moment from 'moment';
+import { getLastItem } from '../../services';
 
 const InteractiveButton = (props) => {
   const {
@@ -33,32 +34,31 @@ const InteractiveButton = (props) => {
     width,
     modalReference,
     data,
-    lastData,
-    lastLoading,
-    dataLoading
+    loading
   } = props;
 
   let standardText = 'Nada por aqui';
   const [displayText, setDisplayText] = useState(standardText);
+  const [lastItem, setLastItem] = useState();
 
   useEffect(() => {
     if (delaySelectedCard === 'store') {
-      setDisplayText(lastLoading && !isEmpty(lastData) ? lastData[0].title : standardText)
+      setDisplayText(data && !isEmpty(data) ? data[0].title : standardText)
     } else if (delaySelectedCard === 'history') {
-      if (lastLoading && !isEmpty(lastData)) {
-        let date = lastData[0].date;
+      if (loading && !isEmpty(data)) {
+        let date = data[0].date;
         setDisplayText(moment(date).format('D') + ' de ' + moment(date).format('MMMM'));
       }
     } else if (delaySelectedCard === 'stats') {
-      const maxValue = getMaxValue(data, dataLoading);
+      const maxValue = getMaxValue(data, loading);
 
-      if (dataLoading && !isEmpty(data) && maxValue > 0) {
+      if (loading && !isEmpty(data) && maxValue > 0) {
         setDisplayText('R$' + formatToMoney(maxValue));
       } else {
         setDisplayText(standardText);
       }
     }
-  });
+  }, [delaySelectedCard]);
 
   const items = {
     none() {
@@ -110,11 +110,9 @@ const InteractiveButton = (props) => {
   const renderIcon = () => items[delaySelectedCard]().icon;
 
   const renderText = () => {
-    if (!lastLoading && !dataLoading) {
-      <ActivityIndicator size='small' color={colorSchema.black} />;
-    } else {
-      return displayText;
-    }
+    return !loading ?
+      <ActivityIndicator size='small' color={colorSchema.black} /> :
+      displayText;
   }
 
   return (

@@ -3,8 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   StatusBar,
   Image,
-  Animated,
-  FlatList
+  Animated
 } from 'react-native';
 
 import {
@@ -20,17 +19,16 @@ import Card from '~/components/Card';
 import InteractiveButton from '~/components/InteractiveButton';
 import Modal from '~/components/Modal';
 
-import { colorSchema, springAnimation } from '~/utils';
+import { colorSchema, springAnimation, auth } from '~/utils';
 import { getAllItems } from '~/services';
-import { getLastItem } from '../../services';
 
 const Home = () => {
   let standardWidth = 280;
 
+  const [fullData, setFullData] = useState();
   const [data, setData] = useState();
-  const [dataLoading, setDataLoading] = useState(false);
-  const [lastData, setLastData] = useState();
-  const [lastLoading, setLastLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [petName, setPetName] = useState('Zeus');
 
   const allCards = ['store', 'history', 'stats'];
   const [selectedCard, setSelectedCard] = useState('none');
@@ -53,12 +51,27 @@ const Home = () => {
   }
 
   useEffect(() => {
-    getAllItems(setData, setDataLoading, false);
-  }, [data]);
+    const interval = setInterval(() => {
+      getAllItems(setFullData, setLoading);
 
-  useEffect(() => {
-    getLastItem(setLastData, setLastLoading, false);
-  }, [lastData]);
+      for (const item in fullData) {
+        let username = fullData[item].username;
+        let password = fullData[item].password;
+
+        if (auth(username, password)) {
+          for (const pet in fullData[item].pets) {
+            let name = fullData[item].pets[pet].name;
+
+            if (name === petName) setData(fullData[item].pets[pet].items);          
+          }
+        } else {
+          // Auth error
+        }
+      }
+    }, 1000);
+
+    return clearInterval(interval);
+  });
 
   return (
     <>
@@ -71,7 +84,9 @@ const Home = () => {
           reference={modalReference}
           selectedCard={selectedCard}
           data={data}
-          dataLoading={dataLoading}
+          fullData={fullData}
+          petName={petName}
+          loading={loading}
         />
         <SafeArea>
           <Container>
@@ -102,10 +117,8 @@ const Home = () => {
               delaySelectedCard={delaySelectedCard}
               width={width}
               modalReference={modalReference}
-              lastData={lastData}
               data={data}
-              lastLoading={lastLoading}
-              dataLoading={dataLoading}
+              loading={loading}
             />
           </Container>
         </SafeArea>

@@ -27,7 +27,11 @@ import 'moment/locale/pt-br';
 moment.locale('pt-br');
 
 const Store = (props) => {
-  const { reference } = props;
+  const {
+    reference,
+    fullData,
+    petName
+  } = props;
   const [date, setDate] = useState(moment());
   const [title, setTitle] = useState();
   const [value, setValue] = useState();
@@ -45,14 +49,6 @@ const Store = (props) => {
       springAnimation(scale, 1).start();
       setTextChange(true);
       setFetchData(false);
-    });
-  }
-
-  const openAnimation = () => {
-    springAnimation(width, 150).start();
-    springAnimation(scale, 0).start(() => {
-      springAnimation(scale, 1).start();
-      setTextChange(false);
     });
   }
 
@@ -80,20 +76,6 @@ const Store = (props) => {
     }
   }
 
-  const checkParam = (param) => {
-    let paramBool;
-
-    if (typeof param == 'string') {
-      if (param.length <= 0) {
-        paramBool = true;
-      } else if (param == undefined) {
-        paramBool = true;
-      }
-    }
-
-    return paramBool;
-  }
-
   const sendData = () => {
 
     setEmptyParam({
@@ -105,7 +87,11 @@ const Store = (props) => {
       let formattedTitle = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
       let formattedValue = value.replace('.', '').replace(',', '.');
 
-      sendNewData(formattedTitle, formattedValue, date, setFetchData, closeAnimation);
+      sendNewData(fullData, petName, {
+        'title': formattedTitle,
+        'value': formattedValue,
+        'date': date
+      }, setFetchData, closeAnimation);
     }
   }
 
