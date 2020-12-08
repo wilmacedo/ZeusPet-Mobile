@@ -26,9 +26,9 @@ export const Title = styled.Text`
   letter-spacing: 6px;
 `;
 
-export const ImageContainer = styled.View`
-  margin: 40px 0 0 5px;
-  align-items: center;
+export const ImageContainer = styled.FlatList`
+  max-height: 338px;
+  padding-top: 20px;
 `;
 
 export const CardContainer = styled.View`

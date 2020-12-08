@@ -3,7 +3,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   StatusBar,
   Image,
-  Animated
+  Animated,
+  FlatList,
+  View,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -19,7 +22,7 @@ import Card from '~/components/Card';
 import InteractiveButton from '~/components/InteractiveButton';
 import Modal from '~/components/Modal';
 
-import { colorSchema, springAnimation, auth } from '~/utils';
+import { colorSchema, springAnimation, auth, petImages } from '~/utils';
 import { getAllItems } from '~/services';
 
 const Home = () => {
@@ -28,13 +31,14 @@ const Home = () => {
   const [fullData, setFullData] = useState();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  const [petName, setPetName] = useState('Cat');
+  const [petName, setPetName] = useState('Zeus');
 
   const allCards = ['store', 'history', 'stats'];
   const [selectedCard, setSelectedCard] = useState('none');
   const [delaySelectedCard, setDelaySelectedCard] = useState('none');
   const [width, setWidth] = useState(new Animated.Value(standardWidth));
   const modalReference = useRef();
+  const petReference = useRef();
 
   const pressCard = (name) => {
     if (selectedCard == name) {
@@ -71,7 +75,7 @@ const Home = () => {
 
   useEffect(() => { if (!loading) updateData(); });
 
-  useEffect(() => updateData(), [selectedCard]);
+  useEffect(() => updateData(), [selectedCard, petName]);
 
   return (
     <>
@@ -93,12 +97,39 @@ const Home = () => {
             <Header>
               <Title>ZEUS</Title>
             </Header>
-            <ImageContainer>
-              <Image
-                source={require('../../../assets/dog.png')}
-                style={{ height: 240, width: 328 }}
-              />
-            </ImageContainer>
+            <ImageContainer
+              ref={petReference}
+              data={petImages}
+              keyExtractor={item => item.index}
+              horizontal
+              pagingEnabled
+              decelerationRate={'fast'}
+              initialScrollIndex={petName === 'Zeus' ? 0 : 1}
+              showsHorizontalScrollIndicator={false}
+              onMomentumScrollEnd={(event) => {
+                let index = parseInt(event.nativeEvent.contentOffset.x / 392);
+
+                for (const item in petImages) {
+                  if (petImages[item].index === index) {
+                    setPetName(petImages[item].name);
+                  }
+                }
+              }}
+              onScroll={_ => pressCard(selectedCard)}
+              renderItem={({ item }) => {
+                return <View style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: Dimensions.get('window').width
+                }}>
+                  <Image
+                    source={item.image}
+                    style={item.style}
+                  />
+                </View>
+
+              }}
+            />
             <CardContainer>
               {allCards.map((item, index) => {
                 return <Card key={index}
@@ -117,6 +148,7 @@ const Home = () => {
               delaySelectedCard={delaySelectedCard}
               width={width}
               modalReference={modalReference}
+              petName={petName}
               data={data}
               loading={loading}
             />

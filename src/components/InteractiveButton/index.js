@@ -32,6 +32,7 @@ const InteractiveButton = (props) => {
     selectedCard,
     width,
     modalReference,
+    petName,
     data,
     loading
   } = props;
@@ -56,7 +57,7 @@ const InteractiveButton = (props) => {
         setDisplayText(standardText);
       }
     }
-  }, [delaySelectedCard]);
+  }, [selectedCard, petName]);
 
   const items = {
     none() {

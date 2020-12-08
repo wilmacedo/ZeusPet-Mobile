@@ -16,6 +16,20 @@ const credentials = {
   password: 'teste'
 }
 
+export const petImages = [
+  {
+    index: 0,
+    name: 'Zeus',
+    image: require('../../assets/Zeus.png')
+  },
+  {
+    index: 1,
+    name: 'Cat',
+    image: require('../../assets/Cat.png'),
+    style: { transform: [{ scale: 0.8 }] }
+  }
+];
+
 export const springAnimation = (animatedValue, toValue, delay) => {
   return Animated.spring(animatedValue, {
     toValue,

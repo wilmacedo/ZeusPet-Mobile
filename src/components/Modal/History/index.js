@@ -58,7 +58,7 @@ const History = (props) => {
       }
       modalStyle={modalStyle}
       flatListProps={{
-        data: !isEmpty(data) ? searchData || data.reverse() : emptyData,
+        data: !isEmpty(data) ? searchData || data : emptyData,
         renderItem: ({ item }) => {
           return (
             <Item
