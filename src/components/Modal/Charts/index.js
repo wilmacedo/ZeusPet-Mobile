@@ -29,7 +29,7 @@ const Charts = (props) => {
   const {
     reference,
     data,
-    dataLoading
+    loading
   } = props;
   const days = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
@@ -37,7 +37,7 @@ const Charts = (props) => {
     return days.map((name, index) => {
       return <Bar
         key={index}
-        height={getHeight(name, data, dataLoading)}
+        height={getHeight(name, data, loading)}
         marginLeft={index > 0 ? 10 : 0}
         name={name}
       />
@@ -46,7 +46,7 @@ const Charts = (props) => {
 
   const cardItems = [
     {
-      value: () => formatToMoney(getMaxValue(data, dataLoading)),
+      value: () => formatToMoney(getMaxValue(data, loading)),
       icon: () => <FontAwesome5
         name="money-bill-alt"
         size={12}
@@ -56,7 +56,7 @@ const Charts = (props) => {
       sub: 'R$ '
     },
     {
-      value: () => getDayMaxValue(data, dataLoading),
+      value: () => getDayMaxValue(data, loading),
       icon: () => <FontAwesome
         name="calendar-o"
         size={12}
@@ -66,7 +66,7 @@ const Charts = (props) => {
     }
   ];
 
-  return !dataLoading ?
+  return !loading ?
     <Modalize
       ref={reference}
       modalHeight={480}

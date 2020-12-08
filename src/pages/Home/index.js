@@ -28,7 +28,7 @@ const Home = () => {
   const [fullData, setFullData] = useState();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  const [petName, setPetName] = useState('Zeus');
+  const [petName, setPetName] = useState('Cat');
 
   const allCards = ['store', 'history', 'stats'];
   const [selectedCard, setSelectedCard] = useState('none');

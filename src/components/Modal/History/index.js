@@ -16,14 +16,9 @@ const History = (props) => {
   const {
     reference,
     data,
-    dataLoading
+    loading
   } = props;
   const [searchData, setSearchData] = useState();
-  const [revData, setRevData] = useState();
-
-  useEffect(() => {
-    setRevData(data.reverse());
-  }, [data]);
 
   const emptyData = [{
     title: 'Nada por aqui',
@@ -37,7 +32,7 @@ const History = (props) => {
     </LoadingView>
   }
 
-  return !dataLoading ?
+  return !loading ?
     <Modalize
       ref={reference}
       snapPoint={450}
@@ -63,7 +58,7 @@ const History = (props) => {
       }
       modalStyle={modalStyle}
       flatListProps={{
-        data: !isEmpty(data) ? searchData || revData : emptyData,
+        data: !isEmpty(data) ? searchData || data.reverse() : emptyData,
         renderItem: ({ item }) => {
           return (
             <Item
