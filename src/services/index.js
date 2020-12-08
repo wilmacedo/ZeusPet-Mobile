@@ -1,6 +1,6 @@
 import { auth } from '~/utils';
 
-const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
+const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus/';
 
 const errorMsg = (error) => console.log('[Services] ' + error);
 
@@ -51,8 +51,6 @@ export const sendNewData = (
     }
   }
 
-  setFetchData(true);
-
   fetch(url, {
     method: 'PUT',
     headers: {
@@ -66,6 +64,7 @@ export const sendNewData = (
       setFetchData('error');
     })
     .finally(() => {
+      setFetchData(true);
       closeAnimation();
     });
 }
