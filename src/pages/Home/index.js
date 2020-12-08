@@ -50,28 +50,28 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getAllItems(setFullData, setLoading);
+  const updateData = () => {
+    getAllItems(setFullData, setLoading);
 
-      for (const item in fullData) {
-        let username = fullData[item].username;
-        let password = fullData[item].password;
+    for (const item in fullData) {
+      let username = fullData[item].username;
+      let password = fullData[item].password;
 
-        if (auth(username, password)) {
-          for (const pet in fullData[item].pets) {
-            let name = fullData[item].pets[pet].name;
+      if (auth(username, password)) {
+        for (const pet in fullData[item].pets) {
+          let name = fullData[item].pets[pet].name;
 
-            if (name === petName) setData(fullData[item].pets[pet].items);          
-          }
-        } else {
-          // Auth error
+          if (name === petName) setData(fullData[item].pets[pet].items);
         }
+      } else {
+        // Auth error
       }
-    }, 1000);
+    }
+  }
 
-    return clearInterval(interval);
-  });
+  useEffect(() => { if (!loading) updateData(); });
+
+  useEffect(() => updateData(), [selectedCard]);
 
   return (
     <>

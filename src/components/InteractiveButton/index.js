@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 import { colorSchema, formatToMoney } from '~/utils';
-import { isEmpty } from '~/services';
+import { isEmpty, getLastItem } from '~/services';
 import { getMaxValue } from '~/components/Modal/Charts/filter-data';
 
 import {
@@ -25,7 +25,6 @@ import {
 } from '@expo/vector-icons';
 
 import moment from 'moment';
-import { getLastItem } from '../../services';
 
 const InteractiveButton = (props) => {
   const {
@@ -39,14 +38,13 @@ const InteractiveButton = (props) => {
 
   let standardText = 'Nada por aqui';
   const [displayText, setDisplayText] = useState(standardText);
-  const [lastItem, setLastItem] = useState();
 
   useEffect(() => {
     if (delaySelectedCard === 'store') {
-      setDisplayText(data && !isEmpty(data) ? data[0].title : standardText)
+      setDisplayText(data && !isEmpty(data) ? getLastItem(data).title : standardText)
     } else if (delaySelectedCard === 'history') {
       if (loading && !isEmpty(data)) {
-        let date = data[0].date;
+        let date = getLastItem(data).date;
         setDisplayText(moment(date).format('D') + ' de ' + moment(date).format('MMMM'));
       }
     } else if (delaySelectedCard === 'stats') {

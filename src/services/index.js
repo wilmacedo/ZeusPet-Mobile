@@ -4,15 +4,17 @@ const baseUrl = 'https://zeus-mobile-backend.herokuapp.com/api/zeus';
 
 const errorMsg = (error) => console.log('[Services] ' + error);
 
-export const getLastItem = (setLastItem, data) => {
+export const getLastItem = (data) => {
   if (data) {
     let size = Object.keys(data).length;
     for (const item in data) {
       if (parseInt(item) === size - 1) {
-        setLastItem(data[item]);
+        return data[item];
       }
     }
   }
+
+  return undefined;
 }
 
 export const getAllItems = (setData, setLoading) => {
