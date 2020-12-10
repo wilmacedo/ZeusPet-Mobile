@@ -107,7 +107,7 @@ const Home = () => {
               initialScrollIndex={petName === 'Zeus' ? 0 : 1}
               showsHorizontalScrollIndicator={false}
               onMomentumScrollEnd={(event) => {
-                let index = parseInt(event.nativeEvent.contentOffset.x / 392);
+                let index = parseInt(event.nativeEvent.contentOffset.x / Dimensions.get('window').width);
 
                 for (const item in petImages) {
                   if (petImages[item].index === index) {
